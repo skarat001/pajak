@@ -14,3 +14,12 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::auth();
+
+Route::get('/home', 'HomeController@index');
+Route::get('/pendaftaran', 'RegistrationController@index');
+Route::get('/profil', 'ProfileController@index');
+Route::get('/sample-page', function () {
+    return view('sample');
+});

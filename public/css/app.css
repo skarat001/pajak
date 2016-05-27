@@ -1,0 +1,14 @@
+.blue{
+  background:#095cb1;
+  color:white;
+}
+.blue > ul > li > a{
+  color: white;
+}
+.blue > ul > li > a:hover{
+  color: black;
+}
+.profile-menu{
+padding:4px;
+}
+.form-group { padding:20px; }

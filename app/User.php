@@ -11,16 +11,17 @@ class User extends Authenticatable
      *
      * @var array
      */
-    protected $fillable = [
-        'name', 'email', 'password',
-    ];
-
+    protected $table = 'user';
+   public $timestamps = false;
     /**
      * The attributes that should be hidden for arrays.
      *
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password',
     ];
+           public function user_has_pribadi(){
+        return $this->hasOne('App\data_pribadi','user_id');
+    }
 }
