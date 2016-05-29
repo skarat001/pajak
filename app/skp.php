@@ -8,4 +8,5 @@ class skp extends Model
 {
     //
       protected $table = 'skp';
+           public $timestamps = false;
 }

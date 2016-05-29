@@ -1,5 +1,7 @@
 <?php
 
+
+use App\Http\Requests;
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -12,14 +14,24 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+	return view('welcome');
 });
-
-Route::auth();
-
 Route::get('/home', 'HomeController@index');
 Route::get('/pendaftaran', 'RegistrationController@index');
-Route::get('/profil', 'ProfileController@index');
+Route::post('/pendaftaran', 
+	['as' => 'room_store', 'uses' => 'RegistrationController@store']);
+Route::get('/perpanjang', 'ExtendController@index');
 Route::get('/sample-page', function () {
-    return view('sample');
+	return view('sample');
+
 });
+Route::auth();
+Route::group([
+	'middleware' => 'auth',
+
+	], function () {
+
+
+		Route::get('/profil', 'ProfileController@index');
+Route::post('/profil/ubahfoto', ['as' => 'room_store','uses' => 'ProfileController@changephoto']);
+	});

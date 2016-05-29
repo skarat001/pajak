@@ -9,7 +9,7 @@
                 <ul class="nav nav-stacked" id="sidebar">
                   <li><a href="profil">Profil</a></li>
                   <li><a href="#">Cek Email</a></li>
-                  <li><a href="extend-membership">Perpanjang Keanggotaan</a></li>
+                  <li><a href="perpanjang">Perpanjang Keanggotaan</a></li>
                   <li><a href="logout">Logout</a></li>
                 </ul>
        

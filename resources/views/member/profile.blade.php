@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
+    @include('layouts.errors')
+    @include('layouts.success')
 <div class="container">
   <div class="panel">
     <div class="panel-body">
@@ -15,12 +17,12 @@
        <div class="col-md-9">
          <form class="form-horizontal">
           <h1>Profil Anggota </h1>
-
-
           <div class="col-md-3">
+
+
             <div class="row">
               <div class="col-md-12 profile-menu">
-                <img src="  {{$pribadi->foto}}" width="100%" height="200px">
+                <img src="{{URL::asset("image/".$pribadi->foto)}}" width="100%" height="200px">
               </div>
 
               <div class="col-md-12 profile-menu">

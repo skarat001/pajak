@@ -8,4 +8,5 @@ class pekerjaan extends Model
 {
     //
       protected $table = 'pekerjaan';
+           public $timestamps = false;
 }

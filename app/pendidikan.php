@@ -8,4 +8,5 @@ class pendidikan extends Model
 {
     //
      protected $table = 'pendidikan';
+          public $timestamps = false;
 }

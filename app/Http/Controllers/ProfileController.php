@@ -2,9 +2,16 @@
 
 namespace App\Http\Controllers;
 
+
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Http\Request;
+
 use App\Http\Requests;
 use Auth;
-use Illuminate\Http\Request;
+
 use App\User;
 use App\skp;
 use App\data_pribadi;
@@ -38,4 +45,27 @@ class ProfileController extends Controller
         ->with('sertifikat',$sertifikat)
         ->with('pekerjaan',$pekerjaan)->with('pendidikan',$pendidikan);
     }
+
+    public function changephoto(Request $request){
+       if(Input::file())
+       {
+
+        $image = Input::file('foto');
+
+        $filename  = time() . '-' . Str::slug($request->name).'.'. $image->getClientOriginalExtension();
+
+        $path = public_path('image/'.$filename);
+
+        move_uploaded_file($image->getRealPath(), $path);
+               // Image::make($image->getRealPath())->resize(200, 200)->save($path);
+        $request->photo = $filename;
+
+    }
+    $pribadi=data_pribadi::where('user_id',Auth::user()->id)->first();
+    $pribadi->foto=$filename;
+       $pribadi->save();
+    return Redirect::back()
+
+    ->withSuccess('Foto diubah');
+}
 }

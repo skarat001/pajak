@@ -13,7 +13,9 @@
                  @include('layouts.login-sidebar')
              </div>  
              <div class="col-md-9">
-                 <form class="form-horizontal">
+                 <form class="form-horizontal" method="POST" action="{{url('/pendaftaran')}}" 
+                  enctype="multipart/form-data">
+                  <input type="hidden" name="_token" value="{{ csrf_token() }}">
                   <h1>Registrasi Keanggotaan {{config('public.acronim')}} </h1>
                   <h2 class="form-signin-heading">Data Pribadi</h2>
 
@@ -26,11 +28,11 @@
                 <div class="form-group">
                     <label  class="col-md-3" for="ttl" >Tempat/Tanggal Lahir</label>
                     <div  class="col-md-4">
-                        <input  type="text" id="place-birth"  name="place-birth" class="form-control"  placeholder="tempat lahir" required>
+                        <input  type="text" id="place-birth"  name="place_birth" class="form-control"  placeholder="tempat lahir" required>
                     </div>
                     <div  class="col-md-4">
                      <div class='input-group date' id='datetimepicker1'>
-                    <input type='text' class="form-control" name="date-birth"  placeholder="tanggal lahir" />
+                    <input type='text' class="form-control" name="date_birth"  placeholder="tanggal lahir" />
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-calendar"></span>
                     </span>
@@ -48,10 +50,10 @@
                     <label class="col-md-3" for="Name" >Jenis Kelamin</label>
                     <div  class="col-md-9">
                         <div class="radio">
-                          <label><input type="radio" name="ktp">Pria</input>
+                          <label><input type="radio" value="Pria" name="jk" checked="true">Pria</input>
                           </div>
                           <div class="radio">
-                              <label><input type="radio" name="ktp">Wanita</input>
+                              <label><input type="radio" value="Wanita" name="jk">Wanita</input>
                               </div>
                           </div>
                       </div> 
@@ -71,7 +73,7 @@
                 <div class="form-group">
                     <label class="col-md-3" for="Name" >Pendidikan</label>
                     <div  class="col-md-9">
-                       <select class="form-control" id="pendidikan" name="pendidikan">
+                       <select class="form-control" id="pendidikan" name="pendidikan" required>
                         <option>SMA atau sederajat</option>
                         <option>DIII</option>
                         <option>DIV</option>
@@ -90,40 +92,40 @@
                       <label class="col-md-2" for="Provinsi" >Provinsi</label>
                       <div  class="col-md-10">
                        <select class="form-control" id="prov" name="prov">
-                         <option value="1">Nanggroe Aceh Darussalam</option>
-                         <option value="2">Sumatera Utara</option>
-                         <option value="3">Sumatera Barat</option>
-                         <option value="4">Riau</option>
-                         <option value="5">Jambi</option>
-                         <option value="6">Sumatera Selatan</option>
-                         <option value="7">Bengkulu</option>
-                         <option value="8">Lampung</option>
-                         <option value="9">Kepulauan Bangka Belitung</option>
-                         <option value="10">Kepulauan Riau</option>
-                         <option value="11">DKI Jakarta</option>
-                         <option value="12">Jawa Barat</option>
-                         <option value="13">Jawa Tengah</option>
-                         <option value="14">DI Yogyakarta</option>
-                         <option value="15">Jawa Timur</option>
-                         <option value="16">Banten</option>
-                         <option value="17">Bali</option>
-                         <option value="18">Nusa Tenggara Barat</option>
-                         <option value="19">Nusa Tenggara Timur</option>
-                         <option value="20">Kalimantan Barat</option>
-                         <option value="21">Kalimantan Selatan</option>
-                         <option value="22">Kalimantan Timur</option>
-                         <option value="23">Kalimantan Tengah</option>
-                         <option value="24">Sulawesi Utara</option>
-                         <option value="25">Sulawesi Tengah</option>
-                         <option value="26">Sulawesi Selatan</option>
-                         <option value="27">Sulawesi Tenggara</option>
-                         <option value="28">Gorontalo</option>
-                         <option value="29">Sulawesi Barat</option>
-                         <option value="30">Maluku</option>
-                         <option value="31">Maluku Utara</option>
-                         <option value="32">Papua</option>
-                         <option value="33">Papua Barat</option>
-                         <option value="35">Kalimantan Utara</option>
+                         <option >Nanggroe Aceh Darussalam</option>
+                         <option >Sumatera Utara</option>
+                         <option >Sumatera Barat</option>
+                         <option >Riau</option>
+                         <option >Jambi</option>
+                         <option >Sumatera Selatan</option>
+                         <option >Bengkulu</option>
+                         <option >Lampung</option>
+                         <option >Kepulauan Bangka Belitung</option>
+                         <option >Kepulauan Riau</option>
+                         <option >DKI Jakarta</option>
+                         <option >Jawa Barat</option>
+                         <option >Jawa Tengah</option>
+                         <option >DI Yogyakarta</option>
+                         <option >Jawa Timur</option>
+                         <option >Banten</option>
+                         <option >Bali</option>
+                         <option >Nusa Tenggara Barat</option>
+                         <option >Nusa Tenggara Timur</option>
+                         <option >Kalimantan Barat</option>
+                         <option >Kalimantan Selatan</option>
+                         <option >Kalimantan Timur</option>
+                         <option >Kalimantan Tengah</option>
+                         <option >Sulawesi Utara</option>
+                         <option >Sulawesi Tengah</option>
+                         <option >Sulawesi Selatan</option>
+                         <option >Sulawesi Tenggara</option>
+                         <option >Gorontalo</option>
+                         <option >Sulawesi Barat</option>
+                         <option >Maluku</option>
+                         <option >Maluku Utara</option>
+                         <option >Papua</option>
+                         <option >Papua Barat</option>
+                         <option >Kalimantan Utara</option>
 
 
                      </select>
@@ -132,14 +134,14 @@
              <div class="form-group">
               <label class="col-md-2" for="alamat" >Alamat Lengkap</label>
               <div  class="col-md-10">
-               <textarea class="form-control" id="alamat" name="alamat"></textarea>
+               <textarea class="form-control" id="alamat" name="alamat" required></textarea>
 
            </div>
        </div>
        <div class="form-group">
           <label class="col-md-2" for="pos" >Kode Pos</label>
           <div  class="col-md-10">
-              <input  type="text" id="pos" name="pos" class="form-control" required >
+              <input  type="text" id="pos" name="pos" class="form-control"  >
 
           </div>
       </div>
@@ -155,7 +157,7 @@
 <div class="form-group">
     <label class="col-md-3" for="telp" >Nomor Telepon Rumah</label>
     <div  class="col-md-9">
-        <input  type="text" id="telp" name="telp" class="form-control" required >
+        <input  type="text" id="telp" name="telp" class="form-control"  >
     </div>
 </div>
 
@@ -169,13 +171,13 @@
 <div class="form-group">
     <label class="col-md-3" for="hp" >Handphone</label>
     <div  class="col-md-9">
-        <input  type="text" id="hp" name="hp" class="form-control"  >
+        <input  type="text" id="hp" name="hp" class="form-control" required >
     </div>
 </div>
 <div class="form-group">
     <label class="col-md-3" for="photo" >Unggah Foto Profil</label>
     <div  class="col-md-9">
-        <input  type="file" id="photo" name="photo" class="form-control"  >
+        <input  type="file" id="photo" name="photo" class="form-control" required >
     </div>
 </div>
 
@@ -190,52 +192,52 @@
     <div class="form-group">
         <label class="col-md-3" for="hp" >Jabatan</label>
         <div  class="col-md-9">
-            <input  type="text" id="jabatan-perusahaan" name="jabatan-perusahaan" class="form-control"  >
+            <input  type="text" id="jabatan_perusahaan" name="jabatan_perusahaan" class="form-control"  >
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-3" for="hp" >Alamat Perusahaan</label>
         <div  class="col-md-9">
-            <input  type="text" id="alamat-perusahaan" name="alamat-perusahaan" class="form-control"  >
+            <input  type="text" id="alamat_perusahaan" name="alamat_perusahaan" class="form-control"  >
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-3" for="alamat" >Alamat Korespondensi</label>
         <div  class="col-md-9">
            <div class="radio">
-            <label><input type="radio" name="korespondensi-perusahaan">Kantor</input></label>
+            <label><input type="radio" value="Kantor" name="korespondensi_perusahaan"  checked="true">Kantor</input></label>
         </div>
         <div class="radio">
-          <label><input type="radio" name="korespondensi-perusahaan">Rumah</input></label>
+          <label><input type="radio" value="Kantor" name="korespondensi_perusahaan">Rumah</input></label>
       </div>
     </div>
     </div>
     <div class="form-group">
         <label class="col-md-3" for="telp" >Nomor Telepon</label>
         <div  class="col-md-9">
-            <input  type="text" id="telepon-perusahaan" name="telepon-perusahaan" class="form-control"  >
+            <input  type="text" id="telepon_perusahaan" name="telepon_perusahaan" class="form-control"  >
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-3" for="hp" >Extension</label>
         <div  class="col-md-9">
-            <input  type="text" id="extension-perusahaan" name="extension-perusahaan" class="form-control"  >
+            <input  type="text" id="extension_perusahaan" name="extension_perusahaan" class="form-control"  >
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-3" for="hp" >Nomor Fax</label>
         <div  class="col-md-9">
-            <input  type="text" id="fax-perusahaan" name="fax-perusahaan" class="form-control"  >
+            <input  type="text" id="fax_perusahaan" name="fax_perusahaan" class="form-control"  >
         </div>
     </div>
     <div class="form-group">
         <label class="col-md-3" for="hp" >Job Level</label>
         <div  class="col-md-9">
-           <select class="form-control" id="job-level" name="job-level">
-              <option selected="selected" value="1">Entry Level</option>
-              <option value="2">Middle Management</option>
-              <option value="3">Senior Management</option>
-              <option value="4">Top Management</option>
+           <select class="form-control" id="job_level" name="job_level">
+              <option selected="selected" >Entry Level</option>
+              <option >Middle Management</option>
+              <option >Senior Management</option>
+              <option >Top Management</option>
 
           </select>
       </div>
@@ -243,14 +245,14 @@
     <div class="form-group">
         <label class="col-md-3" for="hp" >Kategori Pekerjaan</label>
         <div  class="col-md-9">
-           <select class="form-control" id="job-category" name="job-category">
-             <option selected="selected" value="1">Akuntan Sektor Publik</option>
-        <option value="2">Akuntan Pendidik</option>
-        <option value="3">Akuntan Manajemen</option>
-        <option value="4">Akuntan Publik</option>
-        <option value="5">Akuntan Pajak</option>
-        <option value="6">Internal Audit</option>
-        <option value="8">Lainnya</option>
+           <select class="form-control" id="job_category" name="job_category">
+             <option selected="selected" >Akuntan Sektor Publik</option>
+        <option >Akuntan Pendidik</option>
+        <option >Akuntan Manajemen</option>
+        <option >Akuntan Publik</option>
+        <option >Akuntan Pajak</option>
+        <option >Internal Audit</option>
+        <option >Lainnya</option>
 
 
 
@@ -260,14 +262,14 @@
     <div class="form-group">
         <label class="col-md-3" for="hp" >Tipe Instansi/Perusahaan</label>
         <div  class="col-md-9">
-           <select class="form-control" id="tipe-perusahaan" name="tipe-perusahaan">
-              <option selected="selected" value="1">Listed Company</option>
-        <option value="2">BUMN</option>
-        <option value="3">BUMD</option>
-        <option value="4">Multinasional</option>
-        <option value="5">Small Medium Enterprise</option>
-        <option value="6">Non-SME</option>
-        <option value="7">Lainnya</option>
+           <select class="form-control" id="tipe_perusahaan" name="tipe_perusahaan">
+              <option selected="selected" >Listed Company</option>
+        <option >BUMN</option>
+        <option >BUMD</option>
+        <option >Multinasional</option>
+        <option >Small Medium Enterprise</option>
+        <option >Non-SME</option>
+        <option >Lainnya</option>
 
 
           </select>
@@ -276,25 +278,25 @@
     <div class="form-group">
         <label class="col-md-3" for="hp" >Kategori Bisnis</label>
         <div  class="col-md-9">
-           <select class="form-control" id="kategori-bisnis" name="kategori-bisnis">
-           <option selected="selected" value="1">Pemerintah</option>
-            <option value="2">Pendidikan</option>
-            <option value="3">Manufaktur</option>
-            <option value="4">Perbankan</option>
-            <option value="5">Auditing &amp; Assurance</option>
-            <option value="6">Konstruksi</option>
-            <option value="7">Konsultan</option>
-            <option value="8">Properti</option>
-            <option value="9">Asuransi</option>
-            <option value="10">Keuangan</option>
-            <option value="11">Pajak</option>
-            <option value="12">Migas</option>
-            <option value="13">Perdagangan</option>
-            <option value="14">Agrobisnis</option>
-            <option value="15">Hotel</option>
-            <option value="16">IT &amp; Telekomunikasi</option>
-            <option value="17">Shipping</option>
-            <option value="19">Lainnya</option>
+           <select class="form-control" id="kategori_bisnis" name="kategori_bisnis">
+           <option selected="selected" >Pemerintah</option>
+            <option>Pendidikan</option>
+            <option>Manufaktur</option>
+            <option>Perbankan</option>
+            <option>Auditing &amp; Assurance</option>
+            <option>Konstruksi</option>
+            <option>Konsultan</option>
+            <option>Properti</option>
+            <option>Asuransi</option>
+            <option>Keuangan</option>
+            <option>Pajak</option>
+            <option>Migas</option>
+            <option>Perdagangan</option>
+            <option>Agrobisnis</option>
+            <option>Hotel</option>
+            <option>IT &amp; Telekomunikasi</option>
+            <option>Shipping</option>
+            <option>Lainnya</option>
 
 
 
@@ -312,13 +314,7 @@
 </div>
 </div>
 <script >
-$( document ).ready(function() {
-      $(function () {
-                $('#datetimepicker1').datetimepicker({
-                     format: 'L'
-                });
-            });
-      });
+
 </script>
 
 @stop
@@ -333,10 +329,30 @@ $( document ).ready(function() {
 $( document ).ready(function() {
       $(function () {
                 $('#datetimepicker1').datetimepicker({
-                     format: 'L'
+                     format: 'YYYY-MM-DD'
                 });
             });
       });
+/*myFunction();
+function myFunction() {
+  var x = document.querySelectorAll('input,textarea,select');
+
+  console.log("x: " + x);
+  console.log("Number of inputs: " + x.length);
+
+  var arrayOfInputNames = [];
+var name;
+  for (var i = 0; i < x.length; i++) {
+  //for(key in x) {
+    console.log("i: " + i);
+    console.log("value: " + x[i].name);
+name=name+" "+x[i].name;
+    arrayOfInputNames.push(x[i].name);
+  }
+
+  console.log(name);
+  document.getElementById("demo").innerHTML = arrayOfInputNames;
+}*/
 </script>
 @stop
 

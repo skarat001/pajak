@@ -561,6 +561,8 @@
     <div class="modal-dialog">
     
       <!-- Modal content-->
+       <form class="form-horizontal" method="POST" action="{{url('/profil/ubahfoto')}}" 
+                  enctype="multipart/form-data">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -568,30 +570,30 @@
         </div>
         <div class="modal-body">
         <div class="row">
-     <form class="form">
+  
+                  <input type="hidden" name="_token" value="{{ csrf_token() }}">
                  
            
-                 <div class="form-group">
+              
 
-<div class="form-group">
+<div class="form-group" >
     <label class="col-md-3" for="hp" >Pilih Foto</label>
     <div  class="col-md-9">
        <input type="file" name="foto"></div>
     </div>
-</div>
 
 </div>
 
 
-                </form>
+             
               
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary" data-dismiss="modal">Ubah</button>
+            <button type="submit" class="btn btn-primary" >Ubah</button>
         </div>
       </div>
-      
+         </form>
     </div>
   </div>
   

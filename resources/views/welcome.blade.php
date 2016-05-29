@@ -1,9 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
+    @include('layouts.errors')
+    @include('layouts.success')
 <div class="container">
 <div class="panel">
 <div class="panel-body">
+
     <div class="row">
     <div class="col-md-12">
         <h2 >Selamat Datang</h2>
@@ -24,9 +27,9 @@
          @if (Auth::guest())
                        @include('layouts.login-sidebar')
                     @else
-                        <li class="dropdown">
+                      
                            @include('layouts.account-sidebar')
-                        </li>
+                     
                   @endif
             </div>  
         <div class="col-md-9 intro">

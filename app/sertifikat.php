@@ -8,4 +8,5 @@ class sertifikat extends Model
 {
     //
      protected $table = 'sertifikat';
+          public $timestamps = false;
 }
