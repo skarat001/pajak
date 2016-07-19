@@ -1,5 +1,6 @@
 <?php
 return [
-    'title' => 'My Company',
+    'title' => 'IKPI website',
     'acronim' =>'IKPI',
+    'logo' =>'image/web/favicon.png'
 ];

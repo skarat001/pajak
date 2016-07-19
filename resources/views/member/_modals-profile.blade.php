@@ -429,7 +429,7 @@
         </div>
         <div class="modal-body">
         <div class="row">
-     <form class="form">
+     <form class="form" novalidate>
                  
            
                  <div class="form-group">

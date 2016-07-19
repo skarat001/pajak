@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-    @include('layouts.errors')
-    @include('layouts.success')
+@include('layouts.errors')
+@include('layouts.success')
 <div class="container">
   <div class="panel">
     <div class="panel-body">
@@ -16,11 +16,28 @@
        </div>  
        <div class="col-md-9">
          <form class="form-horizontal">
+@include('layouts.step-member')
+        <!--  <ul class="nav nav-pills nav-wizard wrap">
+            <li class="active"><a href="#" data-toggle="tab">Pendaftaran</a><div class="nav-arrow"></div></li>
+            <li><div class="nav-wedge"></div><a href="#" data-toggle="tab">Konfirmasi Pendaftaran</a><div class="nav-arrow"></div></li>
+            <li><div class="nav-wedge"></div><a href="#" data-toggle="tab">Anggota</a><div class="nav-arrow"></div></li>
+            <li><div class="nav-wedge"></div><a href="#" data-toggle="tab">Pendaftaran</a><div class="nav-arrow"></div></li>
+
+            <li><div class="nav-wedge"></div><a href="#" data-toggle="tab">Konfirmasi Data</a><div class="nav-arrow"></div></li>
+            <li><div class="nav-wedge"></div><a href="#" data-toggle="tab">Konfirmasi Pembayaran</a><div class="nav-arrow"></div></li>
+
+            <li><div class="nav-wedge"></div><a href="#" data-toggle="tab">Waiting Progress</a><div class="nav-arrow"></div></li>
+            <li><div class="nav-wedge"></div><a href="#" data-toggle="tab">Approved</a></li>
+
+          </ul> -->
+
+
           <h1>Profil Anggota </h1>
           <div class="col-md-3">
 
 
             <div class="row">
+
               <div class="col-md-12 profile-menu">
                 <img src="{{URL::asset("image/".$pribadi->foto)}}" width="100%" height="200px">
               </div>
@@ -31,24 +48,24 @@
                 <h5>Sampai <strong>{{Auth::user()->valid_date}}</strong></h5>
               </div>
               <div class="col-md-12 profile-menu">
-                <button class="btn btn-secondary  btn-block">Sudah Registrasi Ulang</button>
+                <span class="btn btn-success btn-block" >Sudah Registrasi Ulang</span>
               </div>
               <div class="col-md-12 profile-menu">
-               <button type="button" class="btn btn-secondary btn-block" data-toggle="modal" data-target="#modal_skp">Klaim SKP</button>
+               <button type="button" class="btn btn-secondary btn-block" data-toggle="modal" data-target="#modal_skp"><i class="fa fa-list" aria-hidden="true"></i> Klaim SKP</button>
              </div>
              <div class="col-md-12 profile-menu">
-               <button type="button" class="btn btn-secondary btn-block"data-toggle="modal" data-target="#modal_password">Ganti Password</button>
+               <button type="button" class="btn btn-secondary btn-block"data-toggle="modal" data-target="#modal_password"><i class="fa fa-unlock-alt" aria-hidden="true"></i> Ganti Password</button>
              </div>
              <div class="col-md-12 profile-menu">
 
-               <button type="button" class="btn btn-secondary btn-block" data-toggle="modal" data-target="#modal_foto">Ubah Foto Profil</button>
+               <button type="button" class="btn btn-secondary btn-block" data-toggle="modal" data-target="#modal_foto"><i class="fa fa-picture-o" aria-hidden="true"></i> Ubah Foto Profil</button>
              </div>
 
              <div class="col-md-12 profile-menu">
-               <button type="button" class="btn btn-secondary btn-block" data-toggle="modal" data-target="#modal_upload">Re-Upload Dokumen</button>
+               <button type="button" class="btn btn-secondary btn-block" data-toggle="modal" data-target="#modal_upload"><i class="fa fa-cloud-upload" aria-hidden="true"></i> Re-Upload Dokumen</button>
              </div>
              <div class="col-md-12 profile-menu">
-              <button class="btn btn-secondary btn-block">Validasi Pembayaran</button>
+              <button class="btn btn-secondary btn-block"><i class="fa fa-credit-card" aria-hidden="true"></i> Validasi Pembayaran</button>
             </div>
 
           </div>
@@ -176,56 +193,56 @@
         Kategori Bisnis Perusahaan
       </td>
       <td>
- {{$pribadi->perusahaan_tipe}}
-      </td>
-    </tr>
-    <tr>
-      <td>
-        Jabatan di Perusahaan
-      </td>
-      <td>
- {{$pribadi->perusahaan_jabatan}}
-      </td>
-
-    </tr>
-    <tr>
-      <td>
-       Kategori Pekerjaan
-     </td>
-     <td>
- {{$pribadi->perusahaan_kategori}}
+       {{$pribadi->perusahaan_tipe}}
      </td>
    </tr>
    <tr>
     <td>
-      Alamat Kantor
+      Jabatan di Perusahaan
     </td>
     <td>
- {{$pribadi->perusahaan_alamat}}
-    </td>
-  </tr>
-    <tr>
-    <td>
-     No Telepon
+     {{$pribadi->perusahaan_jabatan}}
    </td>
-   <td>
-{{$pribadi->perusahaan_telp}}
-   </td>
- </tr>
-  <tr>
-    <td>
-     Extension
-   </td>
-   <td>
-{{$pribadi->perusahaan_extensi}}
-   </td>
+
  </tr>
  <tr>
+  <td>
+   Kategori Pekerjaan
+ </td>
+ <td>
+   {{$pribadi->perusahaan_kategori}}
+ </td>
+</tr>
+<tr>
+  <td>
+    Alamat Kantor
+  </td>
+  <td>
+   {{$pribadi->perusahaan_alamat}}
+ </td>
+</tr>
+<tr>
+  <td>
+   No Telepon
+ </td>
+ <td>
+  {{$pribadi->perusahaan_telp}}
+</td>
+</tr>
+<tr>
+  <td>
+   Extension
+ </td>
+ <td>
+  {{$pribadi->perusahaan_extensi}}
+</td>
+</tr>
+<tr>
   <td>
     No Fax
   </td>
   <td>
-{{$pribadi->perusahaan_fax}}
+    {{$pribadi->perusahaan_fax}}
   </td>
 </tr>
 
@@ -273,20 +290,20 @@
           </thead>
           <tbody>
 
-         @foreach ($skp as $skplist)
+           @foreach ($skp as $skplist)
 
-      <tr>
-              <td>{{$skplist->tahun}}</td>
-              <td>{{$skplist->jumlah}}/{{$skplist->batas}}</td>
-                 <td>{{$skplist->nilai}}</td>
-              <td>{{$skplist->jenis_kegiatan}}</td>
-              <td>{{$skplist->topik}}</td>
-              <td>{{$skplist->penyelenggara}}</td>
-              <td>{{$skplist->lokasi}}</td>
-              <td><button class="btn btn-warning btn-sm">Ubah</button><button class="btn btn-danger btn-sm">Hapus</button>
+           <tr>
+            <td>{{$skplist->tahun}}</td>
+            <td>{{$skplist->jumlah}}/{{$skplist->batas}}</td>
+            <td>{{$skplist->nilai}}</td>
+            <td>{{$skplist->jenis_kegiatan}}</td>
+            <td>{{$skplist->topik}}</td>
+            <td>{{$skplist->penyelenggara}}</td>
+            <td>{{$skplist->lokasi}}</td>
+            <td><button class="btn btn-warning btn-sm">Ubah</button><button class="btn btn-danger btn-sm">Hapus</button>
             </tr>
-                 @endforeach
-           
+            @endforeach
+
           </tbody>
         </table>
       </div>
@@ -315,18 +332,18 @@
             </tr>
           </thead>
           <tbody>
-           
-         @foreach ($pendidikan as $pendidikanlist)
 
-      <tr>
-              <td>{{$pendidikanlist->tanggal}}</td>
-              <td>{{$pendidikanlist->sekolah}}</td>
-                 <td>{{$pendidikanlist->prodi}}</td>
-              <td>{{$pendidikanlist->jenjang}}</td>
-              <td>{{$pendidikanlist->kota}}</td>
-              <td><button class="btn btn-warning btn-sm">Ubah</button><button class="btn btn-danger btn-sm">Hapus</button>
+           @foreach ($pendidikan as $pendidikanlist)
+
+           <tr>
+            <td>{{$pendidikanlist->tanggal}}</td>
+            <td>{{$pendidikanlist->sekolah}}</td>
+            <td>{{$pendidikanlist->prodi}}</td>
+            <td>{{$pendidikanlist->jenjang}}</td>
+            <td>{{$pendidikanlist->kota}}</td>
+            <td><button class="btn btn-warning btn-sm">Ubah</button><button class="btn btn-danger btn-sm">Hapus</button>
             </tr>
-                 @endforeach
+            @endforeach
           </tbody>
         </table>
       </div>
@@ -345,73 +362,73 @@
        <table class="table table-bordered table-hover">
         <thead>
           <tr>
-            <td>Perusahaan</td> 
-            <td>Jabatan</td> 
-            <td>Divisi</td>  
-            <td>Tanggal Mulai Bekerja</td> 
-            <td>Tanggal Akhir Bekerja</td> 
-            <td>Lama Bekerja</td> 
-            <td>Uraian Pekerjaan</td> 
-            <td></td> 
+            <td style ="word-break:break-all;">Perusahaan</td> 
+            <td style ="word-break:break-all;">Jabatan</td> 
+           
+            <td style ="word-break:break-all;">Tanggal Mulai Bekerja</td> 
+            <td style ="word-break:break-all;">Tanggal Akhir Bekerja</td> 
+            <td style ="word-break:break-all;">Lama Bekerja</td> 
+            <td style ="word-break:break-all;">Uraian Pekerjaan</td> 
+            <td style ="word-break:break-all;"></td> 
           </tr>
         </thead>
         <tbody>
           @foreach ($pekerjaan as $pekerjaanlist)
 
-      <tr>
-              <td>{{$pekerjaanlist->nama}}</td>
-              <td>{{$pekerjaanlist->jabatan}}</td>
-               <td>{{$pekerjaanlist->divisi}}</td>
-                 <td>{{$pekerjaanlist->masuk}}</td>
-              <td>{{$pekerjaanlist->keluar}}</td>
-              <td>{{$pekerjaanlist->durasi}}</td>
-                <td>{{$pekerjaanlist->deskripsi}}</td>
-              <td><button class="btn btn-warning btn-sm">Ubah</button><button class="btn btn-danger btn-sm">Hapus</button>
-            </tr>
-                 @endforeach
-        </tbody>
-      </table>
-    </div>
-  </div>
-</div>
-
-<div class="panel panel-default">
-  <div class="panel-heading">
-    <h4 class="panel-title">
-      <a data-toggle="collapse" data-parent="#accordion" href="#collapseSeven"><span style="display: block;">Riwayat Sertifikasi</span></a>
-    </h4>
-  </div>
-  <div id="collapseSeven" class="panel-collapse collapse">
-
-    <div class="panel-body">
-      <button  type="button"  class="btn btn-primary"  data-toggle="modal" data-target="#modal_sertifikat">Tambah</button>
-
-      <table class="table table-bordered table-hover">
-        <thead>
           <tr>
-            <td>Tanggal Sertifikasi</td> 
-            <td>Nama Sertifikasi</td> 
-            <td>Nomor Sertifikasi</td>   
-            <td>Penyelenggara</td> 
-  <td></td> 
-          </tr>
-        </thead>
-        <tbody>
-                 @foreach ($sertifikat as $sertifikatlist)
-
-      <tr>
-              <td>{{$sertifikatlist->tanggal}}</td>
-              <td>{{$sertifikatlist->nama}}</td>
-               <td>{{$sertifikatlist->no}}</td>
-                 <td>{{$sertifikatlist->penyelenggara}}</td>
-                         <td><button class="btn btn-warning btn-sm">Ubah</button><button class="btn btn-danger btn-sm">Hapus</button>
+            <td>{{$pekerjaanlist->nama}}</td>
+            <td>{{$pekerjaanlist->jabatan}}</td>
+         
+            <td>{{$pekerjaanlist->masuk}}</td>
+            <td>{{$pekerjaanlist->keluar}}</td>
+            <td>{{$pekerjaanlist->durasi}}</td>
+            <td>{{$pekerjaanlist->deskripsi}}</td>
+            <td><button class="btn btn-warning btn-sm">Ubah</button><button class="btn btn-danger btn-sm">Hapus</button>
             </tr>
-                 @endforeach
-        </tbody>
-      </table>
+            @endforeach
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
-</div>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapseSeven"><span style="display: block;">Riwayat Sertifikasi</span></a>
+      </h4>
+    </div>
+    <div id="collapseSeven" class="panel-collapse collapse">
+
+      <div class="panel-body">
+        <button  type="button"  class="btn btn-primary"  data-toggle="modal" data-target="#modal_sertifikat">Tambah</button>
+
+        <table class="table table-bordered table-hover">
+          <thead>
+            <tr>
+              <td>Tanggal Sertifikasi</td> 
+              <td>Nama Sertifikasi</td> 
+              <td>Nomor Sertifikasi</td>   
+              <td>Penyelenggara</td> 
+              <td></td> 
+            </tr>
+          </thead>
+          <tbody>
+           @foreach ($sertifikat as $sertifikatlist)
+
+           <tr>
+            <td>{{$sertifikatlist->tanggal}}</td>
+            <td>{{$sertifikatlist->nama}}</td>
+            <td>{{$sertifikatlist->no}}</td>
+            <td>{{$sertifikatlist->penyelenggara}}</td>
+            <td><button class="btn btn-warning btn-sm">Ubah</button><button class="btn btn-danger btn-sm">Hapus</button>
+            </tr>
+            @endforeach
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 </div>
 </div>
 </div>
@@ -432,7 +449,6 @@
 
 @stop
 @section('scripts')
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
 
 <script type="text/javascript" src="{{ asset("/bower_components/moment/min/moment.min.js")}}"></script>
 

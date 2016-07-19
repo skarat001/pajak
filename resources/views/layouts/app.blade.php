@@ -4,7 +4,9 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+<link rel="icon" 
+      type="image/png" 
+      href="{{ URL::asset(config('public.logo'))}}">
     <title>{{config('public.title')}}</title>
 
     <!-- Fonts -->
@@ -12,10 +14,12 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700">
 
     <!-- Styles -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ URL::asset('bower_components/bootstrap/dist/css/bootstrap.min.css') }}" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+ <!--    <link rel="stylesheet" href="{{ URL::asset('bower_components/bootstrap/dist/css/bootstrap-theme.min.css') }}"> -->
+ <link  href="{{ asset("/css/home.css")}}" rel="stylesheet"/>
      <link rel="stylesheet" href="{{ URL::asset('css/app.css') }}">
      <link rel="stylesheet" href="{{ URL::asset('css/navbar.css') }}">
-        
+     <link rel="stylesheet" href="{{ URL::asset('bower_components/progress-bar/bootstrap-nav-wizard.css') }}">   
 
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
    @yield('styles')
@@ -29,10 +33,10 @@
         }
     </style>
 </head>
-<body id="app-layout">
+<body >
 
     
-</div>
+<div class="row">
     <nav class="navbar navbar-default navbar-static-top">
         <div class="container">
             <div class="navbar-header">
@@ -82,7 +86,7 @@
                 </ul>
             </div>
         </div>
-        <div class="masthead">
+     
    <div id="myCarousel" class="carousel slide" data-ride="carousel">
   <!-- Indicators -->
   <ol class="carousel-indicators">
@@ -94,15 +98,15 @@
   <!-- Wrapper for slides -->
   <div class="carousel-inner" role="listbox">
     <div class="item active">
-      <img src="http://kalotrainfotech.com/img/HD-Web-Informational-Ecommerce.jpg" class="img" alt="img1">
+      <img src="{{ URL::asset('image/web/1.png') }}" class="img" alt="img1" style="height:auto;max-height:300px;width:auto">
     </div>
 
     <div class="item">
-      <img src="http://www.devscare.com/wp-content/uploads/2015/12/atai.jpg" class="img" alt="img2">
+      <img src="{{ URL::asset('image/web/2.png') }}" class="img" alt="img2" style="height:auto;max-height:300px;width:auto">
     </div>
 
     <div class="item">
-      <img src="http://freedesignfile.com/upload/2012/11/business_people_02.jpg" class="img" alt="Flower">
+      <img src="{{ URL::asset('image/web/3.png') }}" class="img" alt="Flower" style="height:auto;max-height:300px;width:auto">
     </div>
 
   </div>
@@ -117,12 +121,14 @@
     <span class="sr-only">Next</span>
   </a>
 </div>
-    </div>
+ 
     </nav>
-     
+     </div>
     @yield('content')
   <!-- JavaScripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>
+    <script src="{{ URL::asset('bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+
  <script type="text/javascript">
  $(document).ready(function(){
 
@@ -132,7 +138,16 @@
 
 
     {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
+<script language="JavaScript" type="text/javascript">
+  $(document).ready(function(){
+    $('.carousel').carousel({
+      interval: 2000
+    })
 
+window.scrollTo(0,0);
+
+  });    
+</script>
       <div class="panel-footer">
   <div class="container">
          <div class="text-left col-md-9">

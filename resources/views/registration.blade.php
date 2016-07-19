@@ -2,6 +2,7 @@
 
 @section('content')
 <div class="container">
+
     <div class="panel">
         <div class="panel-body">
 
@@ -13,22 +14,24 @@
                  @include('layouts.login-sidebar')
              </div>  
              <div class="col-md-9">
+            
+              @include('layouts.step-member')
                  <form class="form-horizontal" method="POST" action="{{url('/pendaftaran')}}" 
                   enctype="multipart/form-data">
                   <input type="hidden" name="_token" value="{{ csrf_token() }}">
                   <h1>Registrasi Keanggotaan {{config('public.acronim')}} </h1>
                   <h2 class="form-signin-heading">Data Pribadi</h2>
-
+@include('layouts.errors')
                   <div class="form-group">
-                    <label class="col-md-3" for="Name" >Nama Lengkap</label>
+                    <label class="col-md-3" for="Name" >Nama Lengkap*</label>
                     <div  class="col-md-9">
-                        <input  type="text" id="name" name="name" class="form-control" required autofocus>
+                        <input  type="text" id="name" name="name" class="form-control"  autofocus>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label  class="col-md-3" for="ttl" >Tempat/Tanggal Lahir</label>
+                    <label  class="col-md-3" for="ttl" >Tempat/Tanggal Lahir*</label>
                     <div  class="col-md-4">
-                        <input  type="text" id="place-birth"  name="place_birth" class="form-control"  placeholder="tempat lahir" required>
+                        <input  type="text" id="place-birth"  name="place_birth" class="form-control"  placeholder="tempat lahir" >
                     </div>
                     <div  class="col-md-4">
                      <div class='input-group date' id='datetimepicker1'>
@@ -41,13 +44,13 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-md-3" for="Name" >Nomor Kartu Tanda Penduduk</label>
+                    <label class="col-md-3" for="Name" >Nomor Kartu Tanda Penduduk*</label>
                     <div  class="col-md-9">
-                        <input  type="text" id="ktp" name="ktp" class="form-control" required autofocus>
+                        <input  type="text" id="ktp" name="ktp" class="form-control"  autofocus>
                     </div>
                 </div>  
                 <div class="form-group">
-                    <label class="col-md-3" for="Name" >Jenis Kelamin</label>
+                    <label class="col-md-3" for="Name" >Jenis Kelamin*</label>
                     <div  class="col-md-9">
                         <div class="radio">
                           <label><input type="radio" value="Pria" name="jk" checked="true">Pria</input>
@@ -71,9 +74,9 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="col-md-3" for="Name" >Pendidikan</label>
+                    <label class="col-md-3" for="Name" >Pendidikan*</label>
                     <div  class="col-md-9">
-                       <select class="form-control" id="pendidikan" name="pendidikan" required>
+                       <select class="form-control" id="pendidikan" name="pendidikan" >
                         <option>SMA atau sederajat</option>
                         <option>DIII</option>
                         <option>DIV</option>
@@ -86,7 +89,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-md-3" for="Name" >Alamat Rumah</label>
+                <label class="col-md-3" for="Name" >Alamat Rumah*</label>
                 <div  class="col-md-9">
                     <div class="form-group">
                       <label class="col-md-2" for="Provinsi" >Provinsi</label>
@@ -134,7 +137,7 @@
              <div class="form-group">
               <label class="col-md-2" for="alamat" >Alamat Lengkap</label>
               <div  class="col-md-10">
-               <textarea class="form-control" id="alamat" name="alamat" required></textarea>
+               <textarea class="form-control" id="alamat" name="alamat" ></textarea>
 
            </div>
        </div>
@@ -148,9 +151,9 @@
   </div>
 </div>
 <div class="form-group">
-    <label class="col-md-3" for="email" >Email</label>
+    <label class="col-md-3" for="email" >Email*</label>
     <div  class="col-md-9">
-        <input  type="text" id="email" name="email" class="form-control" required >
+        <input  type="text" id="email" name="email" class="form-control"  >
     </div>
 </div>
 
@@ -169,15 +172,15 @@
 </div>
 
 <div class="form-group">
-    <label class="col-md-3" for="hp" >Handphone</label>
+    <label class="col-md-3" for="hp" >Handphone*</label>
     <div  class="col-md-9">
-        <input  type="text" id="hp" name="hp" class="form-control" required >
+        <input  type="text" id="hp" name="hp" class="form-control"  >
     </div>
 </div>
 <div class="form-group">
     <label class="col-md-3" for="photo" >Unggah Foto Profil</label>
     <div  class="col-md-9">
-        <input  type="file" id="photo" name="photo" class="form-control" required >
+        <input  type="file" id="photo" name="photo" class="form-control"  >
     </div>
 </div>
 

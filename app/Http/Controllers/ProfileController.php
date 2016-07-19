@@ -11,13 +11,14 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use Auth;
-
 use App\User;
 use App\skp;
 use App\data_pribadi;
 use App\pendidikan;
 use App\pekerjaan;
 use App\sertifikat;
+use App\registration;
+use Mail;
 
 class ProfileController extends Controller
 {
@@ -35,12 +36,16 @@ class ProfileController extends Controller
      */
     public function index()
     {
+         
         $user_id=Auth::user()->id;
         $data_pribadi=data_pribadi::where('user_id',$user_id)->first();
         $skp=skp::where('user_id',$user_id)->get();
         $sertifikat=sertifikat::where('user_id',$user_id)->get();
         $pekerjaan=pekerjaan::where('user_id',$user_id)->get();
         $pendidikan=pendidikan::where('user_id',$user_id)->get();
+
+        $step=registration::where('user_id',$user_id)->first();
+
         return view('member/profile')->with('pribadi',$data_pribadi)->with('skp',$skp)
         ->with('sertifikat',$sertifikat)
         ->with('pekerjaan',$pekerjaan)->with('pendidikan',$pendidikan);

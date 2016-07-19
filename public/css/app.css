@@ -12,3 +12,27 @@
 padding:4px;
 }
 .form-group { padding:20px; }
+
+.wrap > li { 
+  font-size: 11;
+    float: left;
+    width: 100px;
+    height: 50px;
+     word-wrap: break-word;
+}
+.wrap > a{
+  text-decoration: none;
+}
+
+.respimg{
+	height:auto;
+	max-height:300px;
+	width:auto;
+}
+
+.container{
+  
+}
+body{
+  background-color: #ECF0F5;
+}

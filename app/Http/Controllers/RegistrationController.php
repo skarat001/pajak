@@ -7,12 +7,17 @@ namespace App\Http\Controllers;
 use App\data_pribadi;
 use App\user;
 use App\pendidikan;
+use App\Registration;
 
+use Mail;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\Request;
+use App\Http\Requests\RegistrationPostRequest;
+ use Illuminate\Support\Facades\Schema;
+ use Response;
 class RegistrationController extends Controller
 {
     /**
@@ -29,49 +34,42 @@ class RegistrationController extends Controller
      */
     public function index()
     {
-        return view('registration');
+
+  return view('registration')->with('step',"1");
     }
-    public function store(Request $request){
-          $rules = array(
-
-         
-          );
-        $validator = Validator::make(Input::all(), $rules);
-
-          if ($validator->fails()) {
-
-        // get the error messages from the validator
-          $messages = $validator->messages();
-
-        // redirect our user back to the form with the errors from the validator
-          return Redirect::back()
-          ->withErrors($validator);
-
-        }
-        else
-        {
+    public function store(RegistrationPostRequest $request){
+     
         $user =new User;
         $user->username=$request->email;
         $user->email=$request->email;
-        $user->password=bcrypt($request->email);
+        $password=str_random(6);
+        $user->password=bcrypt($password);
         $user->role='member';
         $user->active=1;
         $user->valid_date='2018-01-01';
         $user->save();
- if(Input::file())
+
+        $registration=new Registration;
+        $registration->user_id=$user->id;
+        $registration->step_registration=1;
+        $registration->link=str_random(15);
+        $registration->date_updated=date("Y-m-d");
+        $registration->save();
+
+        if(Input::file())
         {
-  
-            $image = Input::file('photo');
 
-            $filename  = time() . '-' . Str::slug($request->name).'.'. $image->getClientOriginalExtension();
+          $image = Input::file('photo');
 
-            $path = public_path('image/'.$filename);
+          $filename  = time() . '-' . Str::slug($request->name).'.'. $image->getClientOriginalExtension();
 
-        move_uploaded_file($image->getRealPath(), $path);
+          $path = public_path('image/'.$filename);
+
+          move_uploaded_file($image->getRealPath(), $path);
                // Image::make($image->getRealPath())->resize(200, 200)->save($path);
-                $request->photo = $filename;
-         
-           }
+          $request->photo = $filename;
+
+        }
         $pribadi=new data_pribadi;
         $pribadi->nama=$request->name;
         $pribadi->tempat_lahir=$request->place_birth;
@@ -101,10 +99,25 @@ class RegistrationController extends Controller
         $pribadi->user_id=$user->id;
         $pribadi->save();
 
-        $pendidikan=new pendidikan;
-   return redirect('/')
-            ->withSuccess('Pendaftaran berhasil');
-    }
+        $panggilan="";
+        if ($pribadi->jenis_kelamin=="Pria"){
+          $panggilan="Bapak";
+        }
+        else{
+          $panggilan="Ibu";
+        }
+        Mail::send('emails.registration', ['title' => $panggilan, 'name' => $pribadi->nama, 'email'=>$pribadi->email, 'password'=>$password], function ($message) use ($pribadi)
+        {
 
-}
-}
+          $message->from('noreply.ikpi@gmail.com', 'IKPI');
+          $email=$pribadi->email;
+          $message->to($email)->subject("Verifikasi Pendaftaran");
+
+        });
+
+        return redirect('/confirmation')
+        ->withSuccess('Pendaftaran berhasil');
+ 
+
+    }
+  }

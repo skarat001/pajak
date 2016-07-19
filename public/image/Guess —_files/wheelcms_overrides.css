@@ -1,0 +1,23 @@
+body {
+    padding-top: 0px;
+    padding-bottom: 40px;
+}
+
+/* toolbar must not be transparent */
+.toolbar {
+    background-color: black;
+}
+
+.toolbar .glyphicon {
+    font-family: 'Glyphicons Halflings';
+}
+
+/* style.css does not support our reversed toolbar */
+.toolbar .btn {
+    color: #666 !important;
+}
+
+.captchaform input {
+    width: 200px;
+    display: inline;
+}
