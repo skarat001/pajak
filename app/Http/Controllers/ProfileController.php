@@ -48,7 +48,8 @@ class ProfileController extends Controller
 
         return view('member/profile')->with('pribadi',$data_pribadi)->with('skp',$skp)
         ->with('sertifikat',$sertifikat)
-        ->with('pekerjaan',$pekerjaan)->with('pendidikan',$pendidikan);
+        ->with('pekerjaan',$pekerjaan)->with('pendidikan',$pendidikan)
+        ->with('step',"3");
     }
 
     public function changephoto(Request $request){
