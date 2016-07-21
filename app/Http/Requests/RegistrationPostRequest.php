@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use App\Http\Requests\Request;
+
 use App\data_pribadi;
 class RegistrationPostRequest extends Request
 {
@@ -29,14 +30,14 @@ class RegistrationPostRequest extends Request
         'name'=>'required|max:'.$data_pribadi->getSize('nama'),
         "place_birth"=>"required|max:".$data_pribadi->getSize('tempat_lahir'),
         "date_birth"=>"required|date",
-        "ktp"=>"required|max:".$data_pribadi->getSize('no_ktp'),
+        "ktp"=>"required|uniquecustom|max:".$data_pribadi->getSize('no_ktp'),
         "jk"=>"required|",
         "agama" =>"max:".$data_pribadi->getSize('agama'),
     /*    "pendidikan"=>"required|",
         "prov"=>"required|",*/
         "alamat"=>"required|max:".$data_pribadi->getSize('alamat'),
         "pos"=>"required|max:".$data_pribadi->getSize('alamat_pos'),
-        "email"=>"required||email|max:".$data_pribadi->getSize('email'),
+        "email"=>"required|uniquecustom|email|max:".$data_pribadi->getSize('email'),
         "telp"=>"regex:/^\+?[^a-zA-Z]{5,}$/|max:".$data_pribadi->getSize('telp'),
         "fax"=>"max:".$data_pribadi->getSize('fax'),
         "hp"=>"required|regex:/^\+?[^a-zA-Z]{5,}$/|max:".$data_pribadi->getSize('hp'),

@@ -37,8 +37,10 @@ class RegistrationController extends Controller
 
   return view('registration')->with('step',"1");
     }
+
     public function store(RegistrationPostRequest $request){
-     
+
+
         $user =new User;
         $user->username=$request->email;
         $user->email=$request->email;
@@ -56,6 +58,8 @@ class RegistrationController extends Controller
         $registration->date_updated=date("Y-m-d");
         $registration->save();
 
+
+
         if(Input::file())
         {
 
@@ -70,7 +74,16 @@ class RegistrationController extends Controller
           $request->photo = $filename;
 
         }
+        else{
+           $request->photo="person.png";
+        }
+
+    
+       
+
+
         $pribadi=new data_pribadi;
+   
         $pribadi->nama=$request->name;
         $pribadi->tempat_lahir=$request->place_birth;
         $pribadi->tanggal_lahir=$request->date_birth;
@@ -120,4 +133,8 @@ class RegistrationController extends Controller
  
 
     }
+
+  public function checkEmail($attribute, $value, $parameters, $validator) {
+    return false;
+  }
   }
