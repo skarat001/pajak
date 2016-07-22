@@ -10,7 +10,7 @@
 <p>Email anda {{$email}}</p>
 <p>Password anda {{$password}}</p>
 <br/>
-<p>Untuk aktivasi username/email silakan masuk ke {{ url('') }} kemudian log in dengan username/email dan password di atas.</p>
+<p>Untuk aktivasi username/email silakan masuk ke {{ url('/verifikasi/'.$link_verification) }} kemudian log in dengan username/email dan password di atas.</p>
 <br/>
 <p>Selamat menikmati fasilitas IKPI</p>
 <br/>

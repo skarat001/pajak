@@ -21,10 +21,12 @@ Route::get('/pendaftaran', 'RegistrationController@index');
 Route::post('/pendaftaran', 
 	['as' => 'room_store', 'uses' => 'RegistrationController@store']);
 Route::get('/perpanjang', 'ExtendController@index');
-Route::get('/sample-page', function () {
-	return view('sample');
+Route::get('/confirmation', function () {
+	return view('process_member/confirmation');
 
 });
+Route::get('verifikasi/{id}', 
+	['as' => 'verification', 'uses' => 'RegistrationController@verification']);
 Route::auth();
 Route::group([
 	'middleware' => 'auth',
@@ -33,5 +35,5 @@ Route::group([
 
 
 		Route::get('/profil', 'ProfileController@index');
-Route::post('/profil/ubahfoto', ['as' => 'room_store','uses' => 'ProfileController@changephoto']);
+		Route::post('/profil/ubahfoto', ['as' => 'room_store','uses' => 'ProfileController@changephoto']);
 	});
