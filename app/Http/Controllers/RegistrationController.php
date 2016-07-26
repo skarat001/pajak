@@ -35,7 +35,7 @@ class RegistrationController extends Controller
     public function index()
     {
 
-      return view('process_pendaftaran/registration')->with('step',"1");
+      return view('process_member/registration')->with('step',"1");
     }
 
     public function store(RegistrationPostRequest $request){

@@ -6,7 +6,7 @@
 
 <div class="container">
 
-<div class="panel">
+  <div class="panel">
     <div class="panel-body">
 
       <div class="row">
@@ -17,12 +17,16 @@
 
             <br> Silakan memulai dengan mengklik tombol di bawah. </span>
             @if (Auth::guest())
-            <a href="pendaftaran" class="btn btn-primary pull-right btn-lg " type="button">Daftar Anggota</a>
+            <a href="pendaftaran" class="btn btn-primary pull-right btn-lg " type="button">Daftar Lounge</a>
+            @else
+            @if($step==3)
+            <a href="pendaftaran/anggota" class="btn btn-primary pull-right btn-lg " type="button">Daftar Anggota</a>
+            @endif
             @endif
 
           </div>
         </div>
-<br/>
+        <br/>
         <div class="row">
 
           <div class="col-md-3" id="leftCol">

@@ -11,6 +11,7 @@ use App\data_pribadi;
 use App\pendidikan;
 use App\pekerjaan;
 use App\sertifikat;
+use App\registration;
 
 class ExtendController extends Controller
 {
@@ -31,11 +32,13 @@ class ExtendController extends Controller
         $user_id=Auth::user()->id;
         $data_pribadi=data_pribadi::where('user_id',$user_id)->first();
         $skp=skp::where('user_id',$user_id)->get();
-        $sertifikat=sertifikat::where('user_id',$user_id)->get();
-        $pekerjaan=pekerjaan::where('user_id',$user_id)->get();
-        $pendidikan=pendidikan::where('user_id',$user_id)->get();
+        $sertifikat=sertifikat::where('user_id',$user_id)->where('delete_stat',0)->get();
+        $pekerjaan=pekerjaan::where('user_id',$user_id)->where('delete_stat',0)->get();
+        $pendidikan=pendidikan::where('user_id',$user_id)->where('delete_stat',0)->get();
+        $registration=new registration;
         return view('member/extend')->with('pribadi',$data_pribadi)->with('skp',$skp)
         ->with('sertifikat',$sertifikat)
-        ->with('pekerjaan',$pekerjaan)->with('pendidikan',$pendidikan);
+        ->with('pekerjaan',$pekerjaan)->with('pendidikan',$pendidikan)
+        ->with('step','4');
     }
 }

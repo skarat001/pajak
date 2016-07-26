@@ -128,7 +128,8 @@
   <!-- JavaScripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>
     <script src="{{ URL::asset('bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
-
+ <script src="{{ URL::asset('js/app.js') }}"></script>
+  <script src="{{ URL::asset('js/app_profile.js') }}"></script>
  <script type="text/javascript">
  $(document).ready(function(){
 
@@ -137,7 +138,7 @@
       @yield('scripts')
 
 
-    {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
+
 <script language="JavaScript" type="text/javascript">
   $(document).ready(function(){
     $('.carousel').carousel({

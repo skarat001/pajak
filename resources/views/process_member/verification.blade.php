@@ -25,7 +25,7 @@
          <div class="col-md-9">
          @include('layouts.step-member')
          <br/><br/>
-       <p><strong>Verfikasi anggota berhasi</strong></p>
+       <p><strong>Verfikasi anggota berhasil</strong></p>
 <p> </p>
 
 <p>Silahkan melakukan <strong>login</strong> pada form yang telah tersedia. Data <strong>username</strong> dan <strong>password</strong> anda dapat dilihat pada email anda.

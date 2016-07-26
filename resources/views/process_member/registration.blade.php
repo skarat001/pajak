@@ -66,7 +66,7 @@
               checked="true"
               @endif
 
-              >Pria</input>
+              >Pria</input></label>
             </div>
             <div class="radio">
 
@@ -74,7 +74,7 @@
                @if(old('jk')=="Wanita")
                checked="true"
                @endif
-               >Wanita</input>
+               >Wanita</input></label>
              </div>
            </div>
          </div> 
@@ -83,7 +83,14 @@
           <div  class="col-md-9">
             {{
             Form::select('agama',
-            ['Islam','Kristen','Katolik','Hindu','Budha','Lainnya'] ,
+            [
+            'Islam'=>'Islam',
+            'Kristen'=>'Kristen',
+            'Katolik'=>'Katolik',
+            'Hindu'=>'Hindu',
+            'Budha'=>'Budha',
+            'Lainnya'=>'Lainnya',
+            ] ,
             old('agama'), array('class' => 'form-control'))
           }}
         </div>
@@ -93,14 +100,16 @@
         <div  class="col-md-9">
           {{
           Form::select('pendidikan',
-          ['SMA atau sederajat',
-          'DIII',
-          'DIV',
-          'PPA',
-          'SI',
-          'S2',
-          'S3',
-          'Profesor'] ,
+          [
+          'SMA atau sederajat'=>'SMA atau sederajat',
+          'DIII'=>'DIII',
+          'DIV'=>'DIV',
+          'PPA'=>'PPA',
+          'SI'=>'SI',
+          'S2'=>'S2',
+          'S3'=>'S3',
+          'Profesor'=>'Profesor',
+          ] ,
           old('pendidikan'), array('class' => 'form-control'))
         }}
 
@@ -115,40 +124,42 @@
           <div  class="col-md-10">
            {{
            Form::select('prov',
-           [             'Nanggroe Aceh Darussalam',
-           'Sumatera Utara',
-           'Sumatera Barat',
-           'Riau',
-           'Jambi',
-           'Sumatera Selatan',
-           'Bengkulu',
-           'Lampung',
-           'Kepulauan Bangka Belitung',
-           'Kepulauan Riau',
-           'DKI Jakarta',
-           'Jawa Barat',
-           'Jawa Tengah',
-           'DI Yogyakarta',
-           'Jawa Timur',
-           'Banten',
-           'Bali',
-           'Nusa Tenggara Barat',
-           'Nusa Tenggara Timur',
-           'Kalimantan Barat',
-           'Kalimantan Selatan',
-           'Kalimantan Timur',
-           'Kalimantan Tengah',
-           'Sulawesi Utara',
-           'Sulawesi Tengah',
-           'Sulawesi Selatan',
-           'Sulawesi Tenggara',
-           'Gorontalo',
-           'Sulawesi Barat',
-           'Maluku',
-           'Maluku Utara',
-           'Papua',
-           'Papua Barat',
-           'Kalimantan Utara'] ,
+           [
+          'Nanggroe Aceh Darussalam'=>'Nanggroe Aceh Darussalam',
+           'Sumatera Utara'=>'Sumatera Utara',
+           'Sumatera Barat'=>'Sumatera Barat',
+           'Riau'=>'Riau',
+           'Jambi'=>'Jambi',
+           'Sumatera Selatan'=>'Sumatera Selatan',
+           'Bengkulu'=>'Bengkulu',
+           'Lampung'=>'Lampung',
+           'Kepulauan Bangka Belitung'=>'Kepulauan Bangka Belitung',
+           'Kepulauan Riau'=>'Kepulauan Riau',
+           'DKI Jakarta'=>'DKI Jakarta',
+           'Jawa Barat'=>'Jawa Barat',
+           'Jawa Tengah'=>'Jawa Tengah',
+           'DI Yogyakarta'=>'DI Yogyakarta',
+           'Jawa Timur'=>'Jawa Timur',
+           'Banten'=>'Banten',
+           'Bali'=>'Bali',
+           'Nusa Tenggara Barat'=>'Nusa Tenggara Barat',
+           'Nusa Tenggara Timur'=>'Nusa Tenggara Timur',
+           'Kalimantan Barat'=>'Kalimantan Barat',
+           'Kalimantan Selatan'=>'Kalimantan Selatan',
+           'Kalimantan Timur'=>'Kalimantan Timur',
+           'Kalimantan Tengah'=>'Kalimantan Tengah',
+           'Sulawesi Utara'=>'Sulawesi Utara',
+           'Sulawesi Tengah'=>'Sulawesi Tengah',
+           'Sulawesi Selatan'=>'Sulawesi Selatan',
+           'Sulawesi Tenggara'=>'Sulawesi Tenggara',
+           'Gorontalo'=>'Gorontalo',
+           'Sulawesi Barat'=>'Sulawesi Barat',
+           'Maluku'=>'Maluku',
+           'Maluku Utara'=>'Maluku Utara',
+           'Papua'=>'Papua',
+           'Papua Barat'=>'Papua Barat',
+           'Kalimantan Utara'=>'Kalimantan Utara',
+           ] ,
            old('prov'), array('class' => 'form-control'))
          }}
        </div>
@@ -234,10 +245,18 @@
   <label class="col-md-3" for="alamat" >Alamat Korespondensi</label>
   <div  class="col-md-9">
    <div class="radio">
-    <label><input type="radio" value="Kantor" name="korespondensi_perusahaan"  checked="true">Kantor</input></label>
+    <label><input type="radio" value="Kantor" name="korespondensi_perusahaan" 
+     @if(old('korespondensi_perusahaan')=="Kantor"||old('korespondensi_perusahaan')=="")
+              checked="true"
+              @endif
+  >Kantor</input></label>
   </div>
   <div class="radio">
-    <label><input type="radio" value="Kantor" name="korespondensi_perusahaan">Rumah</input></label>
+    <label><input type="radio" value="Rumah" name="korespondensi_perusahaan" 
+   @if(old('korespondensi_perusahaan')=="Rumah")
+              checked="true"
+              @endif
+    >Rumah</input></label>
   </div>
 </div>
 </div>
@@ -267,10 +286,12 @@
   <div  class="col-md-9">
    {{
    Form::select('job_level',
-   [    'Entry Level',
-   'Middle Management',
-   'Senior Management',
-   'Top Management'] ,
+   [    
+   'Entry Level'=>'Entry Level',
+   'Middle Management'=>'Middle Management',
+   'Senior Management'=>'Senior Management',
+   'Top Management'=>'Top Management',
+   ] ,
    old('job_level'), array('class' => 'form-control'))
  }}
 
@@ -281,13 +302,15 @@
   <div  class="col-md-9">
    {{
    Form::select('job_category',
-   ['Akuntan Sektor Publik',
-   'Akuntan Pendidik',
-   'Akuntan Manajemen',
-   'Akuntan Publik',
-   'Akuntan Pajak',
-   'Internal Audit',
-   'Lainnya'] ,
+   [
+   'Akuntan Sektor Publik'=>'Akuntan Sektor Publik',
+   'Akuntan Pendidik'=>'Akuntan Pendidik',
+   'Akuntan Manajemen'=>'Akuntan Manajemen',
+   'Akuntan Publik'=>'Akuntan Publik',
+   'Akuntan Pajak'=>'Akuntan Pajak',
+   'Internal Audit'=>'Internal Audit',
+   'Lainnya'=>'Lainnya',
+   ] ,
    old('job_category'), array('class' => 'form-control'))
  }}
 
@@ -298,13 +321,15 @@
   <div  class="col-md-9">
    {{
    Form::select('tipe_perusahaan',
-   ['Listed Company',
-   'BUMN',
-   'BUMD',
-   'Multinasional',
-   'Small Medium Enterprise',
-   'Non-SME',
-   'Lainnya',] ,
+   [
+   'Listed Company'=>'Listed Company',
+   'BUMN'=>'BUMN',
+   'BUMD'=>'BUMD',
+   'Multinasional'=>'Multinasional',
+   'Small Medium Enterprise'=>'Small Medium Enterprise',
+   'Non-SME'=>'Non-SME',
+   'Lainnya'=>'Lainnya',
+   ] ,
    old('tipe_perusahaan'), array('class' => 'form-control'))
  }}
 
@@ -315,24 +340,26 @@
   <div  class="col-md-9">
    {{
    Form::select('kategori_bisnis',
-   ['Pemerintah',
-   'Pendidikan',
-   'Manufaktur',
-   'Perbankan',
-   'Auditing &amp; Assurance',
-   'Konstruksi',
-   'Konsultan',
-   'Properti',
-   'Asuransi',
-   'Keuangan',
-   'Pajak',
-   'Migas',
-   'Perdagangan',
-   'Agrobisnis',
-   'Hotel',
-   'IT &amp; Telekomunikasi',
-   'Shipping',
-   'Lainnya',] ,
+   [
+   'Pemerintah'=>'Pemerintah',
+   'Pendidikan'=>'Pendidikan',
+   'Manufaktur'=>'Manufaktur',
+   'Perbankan'=>'Perbankan',
+   'Auditing &amp; Assurance'=>'Auditing &amp; Assurance',
+   'Konstruksi'=>'Konstruksi',
+   'Konsultan'=>'Konsultan',
+   'Properti'=>'Properti',
+   'Asuransi'=>'Asuransi',
+   'Keuangan'=>'Keuangan',
+   'Pajak'=>'Pajak',
+   'Migas'=>'Migas',
+   'Perdagangan'=>'Perdagangan',
+   'Agrobisnis'=>'Agrobisnis',
+   'Hotel'=>'Hotel',
+   'IT &amp; Telekomunikasi'=>'IT &amp; Telekomunikasi',
+   'Shipping'=>'Shipping',
+   'Lainnya'=>'Lainnya',
+   ] ,
    old('kategori_bisnis'), array('class' => 'form-control'))
  }}
 

@@ -1,8 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-@include('layouts.errors')
-@include('layouts.success')
+<script>
+    // global app configuration object
+    var config = {
+        routes: "{{ URL::route('getprofil') }}",
+    };
+</script>
 <div class="container">
   <div class="panel">
     <div class="panel-body">
@@ -14,9 +18,11 @@
 
          @include('layouts.account-sidebar')
        </div>  
-       <div class="col-md-9">
-         <form class="form-horizontal">
+       <div class="col-md-9"> 
+         
 @include('layouts.step-member')
+@include('layouts.errors')
+@include('layouts.success')
         <!--  <ul class="nav nav-pills nav-wizard wrap">
             <li class="active"><a href="#" data-toggle="tab">Pendaftaran</a><div class="nav-arrow"></div></li>
             <li><div class="nav-wedge"></div><a href="#" data-toggle="tab">Konfirmasi Pendaftaran</a><div class="nav-arrow"></div></li>
@@ -91,7 +97,7 @@
                </tr>
                <tr>
                 <td>
-                  Nama Lengkap
+                  Nama Lengkap 
                 </td>
                 <td>
                   {{$pribadi->nama}}
@@ -119,7 +125,7 @@
               Nomor Registrasi
             </td>
             <td>
-
+{{$pribadi->no_registrasi}}
             </td>
           </tr>
           <tr>
@@ -127,7 +133,7 @@
               Nomor NPWP
             </td>
             <td>
-
+{{$pribadi->npwp}}
             </td>
           </tr>
           <tr>
@@ -242,6 +248,7 @@
     No Fax
   </td>
   <td>
+
     {{$pribadi->perusahaan_fax}}
   </td>
 </tr>
@@ -299,7 +306,7 @@
             <td>{{$skplist->jenis_kegiatan}}</td>
             <td>{{$skplist->topik}}</td>
             <td>{{$skplist->penyelenggara}}</td>
-            <td>{{$skplist->lokasi}}</td>
+            <td> {{$skplist->lokasi}}</td>
             <td><button class="btn btn-warning btn-sm">Ubah</button><button class="btn btn-danger btn-sm">Hapus</button>
             </tr>
             @endforeach
@@ -318,7 +325,7 @@
     <div id="collapseFive" class="panel-collapse collapse">
 
       <div class="panel-body">
-        <button  type="button"  class="btn btn-primary"  data-toggle="modal" data-target="#modal_pendidikan">Tambah</button>
+        <button  type="button"  class="btn btn-primary"  data-toggle="modal" onClick="b_pendidikan()" data-target="#modal_pendidikan">Tambah</button>
 
         <table class="table table-bordered table-hover">
           <thead>
@@ -341,7 +348,7 @@
             <td>{{$pendidikanlist->prodi}}</td>
             <td>{{$pendidikanlist->jenjang}}</td>
             <td>{{$pendidikanlist->kota}}</td>
-            <td><button class="btn btn-warning btn-sm">Ubah</button><button class="btn btn-danger btn-sm">Hapus</button>
+            <td><button class="btn btn-warning btn-sm" onclick="c_pendidikan({{$pendidikanlist->id}})" data-toggle="modal" data-target="#modal_pendidikan">Ubah</button><button class="btn btn-danger btn-sm"onclick="h_pendidikan({{$pendidikanlist->id}})">Hapus</button>
             </tr>
             @endforeach
           </tbody>
@@ -365,10 +372,10 @@
             <td style ="word-break:break-all;">Perusahaan</td> 
             <td style ="word-break:break-all;">Jabatan</td> 
            
-            <td style ="word-break:break-all;">Tanggal Mulai Bekerja</td> 
-            <td style ="word-break:break-all;">Tanggal Akhir Bekerja</td> 
+            <td style ="word-break:break-all;">Mulai Bekerja</td> 
+            <td style ="word-break:break-all;">Akhir Bekerja</td> 
             <td style ="word-break:break-all;">Lama Bekerja</td> 
-            <td style ="word-break:break-all;">Uraian Pekerjaan</td> 
+            <td style ="word-break:break-all;">Uraian </td> 
             <td style ="word-break:break-all;"></td> 
           </tr>
         </thead>
@@ -383,7 +390,7 @@
             <td>{{$pekerjaanlist->keluar}}</td>
             <td>{{$pekerjaanlist->durasi}}</td>
             <td>{{$pekerjaanlist->deskripsi}}</td>
-            <td><button class="btn btn-warning btn-sm">Ubah</button><button class="btn btn-danger btn-sm">Hapus</button>
+            <td><button class="btn btn-warning btn-sm" onclick="c_pekerjaan({{$pekerjaanlist->id}})" data-toggle="modal" data-target="#modal_riwayat_pekerjaan">Ubah</button><button class="btn btn-danger btn-sm" onclick="h_pekerjaan({{$pekerjaanlist->id}})">Hapus</button>
             </tr>
             @endforeach
           </tbody>
@@ -421,7 +428,7 @@
             <td>{{$sertifikatlist->nama}}</td>
             <td>{{$sertifikatlist->no}}</td>
             <td>{{$sertifikatlist->penyelenggara}}</td>
-            <td><button class="btn btn-warning btn-sm">Ubah</button><button class="btn btn-danger btn-sm">Hapus</button>
+            <td><button class="btn btn-warning btn-sm" onclick="c_sertifikat({{$sertifikatlist->id}})" data-toggle="modal" data-target="#modal_sertifikat">Ubah</button><button class="btn btn-danger btn-sm"onclick="h_sertifikat({{$sertifikatlist->id}})">Hapus</button>
             </tr>
             @endforeach
           </tbody>
@@ -458,32 +465,31 @@
   $( document ).ready(function() {
     $(function () {
       $('#datetimepicker1').datetimepicker({
-       format: 'L'
+       format: 'YYYY-MM-DD'
      });
       $('#datetimepicker2').datetimepicker({
-       format: 'L'
-     });
+       format: 'YYYY-MM-DD'     });
       $('#datetimepicker3').datetimepicker({
-       format: 'L'
+        format: 'YYYY-MM-DD'
      });
       $('#datetimepicker4').datetimepicker({
-       format: 'L'
+        format: 'YYYY-MM-DD'
      });
       $('#datetimepicker5').datetimepicker({
-       format: 'L'
+        format: 'YYYY-MM-DD'
      });
       $('#datetimepicker6').datetimepicker({
-       format: 'L'
+        format: 'YYYY-MM-DD'
      });
       $('#datetimepicker7').datetimepicker({
-       format: 'L'
+        format: 'YYYY-MM-DD'
      });
     });
   });
 </script>
-@stop
-
+@endsection
 
 @section('styles')
+
 <link rel="stylesheet" href="{{ asset("/bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css")}}" />
-@show
+@endsection
