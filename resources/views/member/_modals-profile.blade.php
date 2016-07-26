@@ -415,7 +415,7 @@
           <label class="col-md-3" for="hp" >Tanggal Ijazah</label>
           <div  class="col-md-9">
            <div class='input-group date' id='datetimepicker2'>
-            <input type='text' class="form-control" name="date_certificate" id="date_certificate"  />
+            <input type='text' class="form-control" name="date_certificate" id="date_certificate" required />
             <span class="input-group-addon">
               <span class="glyphicon glyphicon-calendar"></span>
             </span>
@@ -427,13 +427,13 @@
       <div class="form-group">
         <label class="col-md-3" for="hp" >Sekolah/Perguruan Tinggi</label>
         <div  class="col-md-9">
-          <input  type="text" id="sekolah" name="sekolah" class="form-control"  >
+          <input  type="text" id="sekolah" name="sekolah" class="form-control" required >
         </div>
       </div>
       <div class="form-group">
         <label class="col-md-3" for="alamat" >Program Studi</label>
         <div  class="col-md-9">
-          <input  type="text" id="prodi" name="prodi" class="form-control"  >
+          <input  type="text" id="prodi" name="prodi" class="form-control" required  >
         </div>
       </div>
     </div>
@@ -500,12 +500,12 @@
            <div class="form-group">
             <label class="col-md-3" for="hp" >Perusahaan</label>
             <div  class="col-md-9">
-              <input  type="text" id="r_perusahaan" name="r_perusahaan" class="form-control"  >
+              <input  type="text" id="r_perusahaan" name="r_perusahaan" class="form-control" required >
             </div>
             <div class="form-group">
             <label class="col-md-3" for="hp" >Divisi</label>
               <div  class="col-md-9">
-                <input  type="text" id="r_divisi" name="r_divisi" class="form-control"  >
+                <input  type="text" id="r_divisi" name="r_divisi" class="form-control"  required>
               </div>
             </div>
             <div class="form-group">
@@ -518,7 +518,7 @@
               <label class="col-md-3" for="hp" >Mulai Bekerja</label>
               <div  class="col-md-9">
                <div class='input-group date' id='datetimepicker3'>
-                <input type='text' class="form-control" name="r_mulai"  id="r_mulai" />
+                <input type='text' class="form-control" name="r_mulai"  id="r_mulai" required/>
                 <span class="input-group-addon">
                   <span class="glyphicon glyphicon-calendar"></span>
                 </span>
@@ -529,7 +529,7 @@
             <label class="col-md-3" for="alamat" >Berakhir Bekerja</label>
             <div  class="col-md-9">
               <div class='input-group date' id='datetimepicker4'>
-                <input type='text' class="form-control" name="r_akhir"  id="r_akhir" />
+                <input type='text' class="form-control" name="r_akhir"  id="r_akhir" required />
                 <span class="input-group-addon">
                   <span class="glyphicon glyphicon-calendar"></span>
                 </span>
@@ -589,7 +589,7 @@
               <label class="col-md-3" for="hp" >Tanggal Sertifikasi</label>
               <div  class="col-md-9">
                <div class='input-group date' id='datetimepicker5'>
-                <input type='text' class="form-control" name="tanggal"  id="tanggal" />
+                <input type='text' class="form-control" name="tanggal"  id="tanggal" required/>
                 <span class="input-group-addon">
                   <span class="glyphicon glyphicon-calendar"></span>
                 </span>
@@ -600,19 +600,19 @@
         <div class="form-group">
           <label class="col-md-3" for="telp" >Nama Sertifikasi</label>
           <div  class="col-md-9">
-           <input  type="text" id="nama" name="nama" class="form-control"  >
+           <input  type="text" id="nama" name="nama" class="form-control"  required>
          </div>
        </div>
        <div class="form-group">
         <label class="col-md-3" for="hp" >Nomor Sertifikasi</label>
         <div  class="col-md-9">
-          <input  type="text" id="nomor" name="nomor" class="form-control"  >
+          <input  type="text" id="nomor" name="nomor" class="form-control"  required>
         </div>
       </div>
       <div class="form-group">
         <label class="col-md-3" for="hp" >Penyelenggara</label>
         <div  class="col-md-9">
-          <input  type="text" id="penyelenggara" name="penyelenggara" class="form-control"  >
+          <input  type="text" id="penyelenggara" name="penyelenggara" class="form-control" required >
         </div>
       </div>
 
@@ -714,7 +714,7 @@
               <label class="col-md-3" for="hp" >Tanggal Mulai</label>
               <div  class="col-md-9">
                <div class='input-group date' id='datetimepicker6'>
-                <input type='text' class="form-control" name="mulai"  id="mulai" />
+                <input type='text' class="form-control" name="mulai"  id="mulai" required/>
                 <span class="input-group-addon">
                   <span class="glyphicon glyphicon-calendar"></span>
                 </span>
@@ -725,7 +725,7 @@
             <label class="col-md-3" for="hp" >Tanggal Berakhir</label>
             <div  class="col-md-9">
              <div class='input-group date' id='datetimepicker7'>
-              <input type='text' class="form-control" name="akhir"  id="akhir" />
+              <input type='text' class="form-control" name="akhir"  id="akhir" required />
               <span class="input-group-addon">
                 <span class="glyphicon glyphicon-calendar"></span>
               </span>
@@ -736,7 +736,7 @@
       <div class="form-group">
         <label class="col-md-3" for="telp" >Aktifitas</label>
         <div  class="col-md-9">
-         <input  type="text" id="aktifitas" name="aktifitas" class="form-control"  >
+         <input  type="text" id="aktifitas" name="aktifitas" class="form-control" required >
        </div>
      </div>
      <div class="form-group">
@@ -785,48 +785,81 @@
       </div>
       <div class="modal-body">
         <div class="row">
-         <form class="form">
+         <form class="form" class="form-vertical" action="a">
 
-           <div class="form-group">      
-            <div class="checkbox">
-              <label><input type="checkbox" checked="true" value="">Kopi Sertifikat Akuntan Profesional (jika ada)</label>
+           <div class="form-group" >      
+            <div class="control-label col-md-6">
+              <label>Kopi Sertifikat Akuntan Profesional (jika ada)</label>
             </div>
-            <div class="checkbox">
-              <label><input type="checkbox" checked="true" value="">Kopi Kartu Anggota</label>
+            <div class="col-md-6">
+            <input type="file" name="file-sertifikat" class="form-control"  >
             </div>
-            <div class="checkbox">
-              <label><input type="checkbox" checked="true" value="">Kopi KTP atau Bukti Domisili Lainnya</label>
             </div>
-            <div class="checkbox">
-              <label><input type="checkbox" checked="true" value="">Surat Keterangan atau Bukti Pengalaman Praktik</label>
+            <div class="form-group" >      
+            <div class="control-label col-md-6">
+              <label>Kopi Kartu Anggota</label>
             </div>
-            <div class="checkbox">
-              <label><input type="checkbox" checked="true" value="">Kopi Ijazah yang Dilegalisir</label>
+            <div class="col-md-6">
+            <input type="file" name="file-kartu" class="form-control" required>
             </div>
-            <div class="checkbox">
-              <label><input type="checkbox" value="">2 Buah Pas Foto dengan Latar Belakang Putih 4x6 Terbaru</label>
             </div>
-            <div class="checkbox">
-              <label><input type="checkbox" checked="true" value="">Kopi Piagam Register Negara Akuntan atau Surat Keterangan Terdaftar dalam Register Negara Akuntan</label>
+            <div class="form-group" >      
+            <div class="control-label col-md-6">
+              <label>
+              Kopi KTP atau Bukti Domisili Lainnya</label>
             </div>
-          </div>
-          <div class="form-group">
-            <label class="col-md-3" for="hp" >Pilih Dukumen</label>
-            <div  class="col-md-9">
-             <input type="file" name="foto"></div>
+            <div class="col-md-6">
+            <input type="file" name="file-ktp" class="form-control" required> 
+            </div>
+            </div>
+           <div class="form-group" >      
+            <div class="control-label col-md-6">
+              <label>
+              Surat Keterangan atau Bukti Pengalaman Praktik</label>
            </div>
-         </div>
+            <div class="col-md-6">
+            <input type="file" name="file-surat" class="form-control" required>
+            </div>
+            </div>
+            <div class="form-group" >      
+            <div class="control-label col-md-6">
+              <label>
+              Kopi Ijazah yang Dilegalisir</label>
+           </div>
+            <div class="col-md-6">
+            <input type="file" name="file-ijazah" class="form-control" required>
+            </div>
+            </div>
+           <div class="form-group" >      
+            <div class="control-label col-md-6">
+              <label>
+              2 Buah Pas Foto dengan Latar Belakang Putih 4x6 Terbaru</label>
+           </div>
+            <div class="col-md-6">
+            <input type="file" name="file-foto" class="form-control" required>
+            </div>
+            </div>
+            <div class="form-group" >      
+            <div class="control-label col-md-6">
+              <label>
+              Kopi Piagam Register Negara Akuntan atau Surat Keterangan Terdaftar dalam Register Negara Akuntan</label>
+          </div>
+            <div class="col-md-6">
+            <input type="file" name="file-piagam" class="form-control">
+            </div>
+            </div>
+    
 
 
 
-
+  <div class="modal-footer">
+      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      <button type="submit" class="btn btn-primary" >Upload</button>
+    </div>
        </form>
 
      </div>
-     <div class="modal-footer">
-      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      <button type="submit" class="btn btn-primary" data-dismiss="modal">Upload</button>
-    </div>
+   
   </div>
 
 </div>
