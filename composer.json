@@ -9,7 +9,10 @@
         "laravel/framework": "5.2.*",
         "laravel-doctrine/fluent": "^1.1",
         "laravel-doctrine/orm": "^1.1",
-         "laravelcollective/html": "~5.0"
+         "laravelcollective/html": "~5.0",
+        "cviebrock/image-validator": "^2.1",
+        "orchestra/imagine": "~3.0",
+        "intervention/image": "^2.3"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

@@ -20,6 +20,7 @@
      <link rel="stylesheet" href="{{ URL::asset('css/app.css') }}">
      <link rel="stylesheet" href="{{ URL::asset('css/navbar.css') }}">
      <link rel="stylesheet" href="{{ URL::asset('bower_components/progress-bar/bootstrap-nav-wizard.css') }}">   
+     <link rel="stylesheet" href="{{ URL::asset('bower_components/dropzone/dist/min/dropzone.min.css')}}">
 
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
    @yield('styles')
@@ -128,6 +129,8 @@
   <!-- JavaScripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>
     <script src="{{ URL::asset('bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+ <script src="{{ URL::asset('bower_components/dropzone/dist/min/dropzone.min.js') }}"></script>
+
  <script src="{{ URL::asset('js/app.js') }}"></script>
   <script src="{{ URL::asset('js/app_profile.js') }}"></script>
  <script type="text/javascript">

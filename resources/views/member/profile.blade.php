@@ -5,6 +5,7 @@
     // global app configuration object
     var config = {
         routes: "{{ URL::route('getprofil') }}",
+        profile: "{{ URL::route('photo') }}",
     };
 </script>
 <div class="container">
@@ -45,7 +46,7 @@
             <div class="row">
 
               <div class="col-md-12 profile-menu">
-                <img src="{{URL::asset("image/".$pribadi->foto)}}" width="100%" height="200px">
+                <img src="{{URL::route('getfoto',$pribadi->foto)}}" width="100%" height="200px">
               </div>
 
               <div class="col-md-12 profile-menu">
@@ -77,6 +78,13 @@
           </div>
         </div>
         <div class="col-md-9">
+<form action="{{ URL::route('photo')}}" class="dropzone" id="upload-photo">
+  <input type="hidden" name="_token" value="{{csrf_token()}}">
+
+</form>
+
+    <!-- The container for the uploaded files -->
+    <div id="files" class="files"></div>
          <div class="panel-group" id="accordion">
           <div class="panel panel-default">
             <div class="panel-heading" >
@@ -462,7 +470,17 @@
 <script type="text/javascript" src="{{ asset("/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js")}}"></script>
 
 <script >
+
   $( document ).ready(function() {
+    Dropzone.options.uploadPhoto = {
+  paramName: "foto", // The name that will be used to transfer the file
+  maxFilesize: 2, // MB
+  maxFiles:1,
+  acceptedFiles: "image/jpeg,image/png,image/gif",
+  init: function() {
+    this.on("maxfilesreached", function(file) { location.reload(); });
+  }
+};
     $(function () {
       $('#datetimepicker1').datetimepicker({
        format: 'YYYY-MM-DD'

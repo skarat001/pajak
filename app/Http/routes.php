@@ -52,6 +52,7 @@ Route::post('/profil/pembayaran/kasir',['as' => 'kasir','uses' => 'ProfileContro
 
 
 		Route::post('/profil/ubahfoto', ['as' => 'photo','uses' => 'ProfileController@changephoto']);
+		Route::get('/profil/getfoto/{filename}', ['as' => 'getfoto','uses' => 'ProfileController@getImgProf']);
 		Route::get('/profil/getProfil', ['as' => 'getprofil','uses' => 'ProfileController@getProfile']);
 		Route::get('/pendaftaran/anggota', ['as' => 'p_anggota','uses' =>'ExtendController@index']);
 	});
