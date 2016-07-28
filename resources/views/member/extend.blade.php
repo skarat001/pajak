@@ -13,6 +13,7 @@
       sertifikat: "{{ URL::route('profil_sertifikat') }}",
     };
   </script>
+    <meta name="_token" content="{{ csrf_token() }}"/>
   <div class="container">
     <div class="panel">
       <div class="panel-body">
@@ -28,8 +29,17 @@
            @include('layouts.step-member')  
 
            <h1>Perpanjang Kenggotaan</h1>
-           <form class="form-horizontal" method="POST" action="{{url('/pendaftaran')}}" 
-           enctype="multipart/form-data" id="p_angota">
+           <form id="my-awesome-dropzone1" class="dropzone" action="{{url('/pendaftaran')}}" >
+   
+  <input type="email" name="username" /><br/>
+   x
+  <input type="password" name="password" />
+
+  <button type="submit">Submit data and files!</button>
+</form>
+           <form class="form-horizontal dropzone" method="POST" action="{{url('/pendaftaran')}}" enctype="multipart/form-data" id="p-anggota">
+            <div class="dropzone-previews"></div> <!-- this is were the previews should be shown. -->
+
            <input type="hidden" name="_token" value="{{ csrf_token() }}">
            <h2 class="form-signin-heading">Data Pribadi</h2>
 
@@ -248,6 +258,10 @@
     <div class="form-group">
       <label class="col-md-3" for="photo" >Unggah Foto Profil</label>
       <div  class="col-md-9">
+              <div class="dz-message"></div>
+            <div class="dropzone-previews" id='preview-template' ></div>   <br/>
+  <!-- Now setup your input fields -->
+<input type="button"  class="element" value="upload" id="gg" /><br/>
         <input  type="file" id="photo" name="photo" class="form-control"  >
       </div>
       <img src="{{URL::asset("image/".$pribadi->foto)}}" width="60px" height="80px">

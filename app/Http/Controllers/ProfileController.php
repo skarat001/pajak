@@ -91,7 +91,7 @@ class ProfileController extends Controller
     $extension = $file->getClientOriginalExtension();
     $mime=$file->getClientMimeType();
     
-    $image = Image::make($file)->resize(300, 450);
+    $image = Image::make($file)->resize(300, 300);
     $image=$image->stream();
     $folder = $_SERVER['DOCUMENT_ROOT'] . '/tmp/';
     

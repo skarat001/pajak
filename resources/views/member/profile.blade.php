@@ -9,6 +9,7 @@
         deletefile: "{{ URL::route('deletedocument') }}",
     };
 </script>
+<meta name="_token" content="{{ csrf_token() }}"/>
 <div class="container">
   <div class="panel">
     <div class="panel-body">

@@ -54,7 +54,7 @@ Route::post('/profil/pembayaran/kasir',['as' => 'kasir','uses' => 'ProfileContro
 		Route::post('/profil/ubahfoto', ['as' => 'photo','uses' => 'ProfileController@changephoto']);
 		Route::get('/profil/getfoto/{filename}', ['as' => 'getfoto','uses' => 'ProfileController@getImgProf']);
 		Route::post('/profil/uploaddokumen', ['as' => 'dokumen','uses' => 'ProfileController@uploadDocument']);
-		Route::get('/profil/deletedokumen/{id}', ['as' => 'deletedocument','uses' => 'ProfileController@deleteDocument']);
+		Route::post('/profil/deletedokumen', ['as' => 'deletedocument','uses' => 'ProfileController@deleteDocument']);
 		Route::get('/profil/getProfil', ['as' => 'getprofil','uses' => 'ProfileController@getProfile']);
 		Route::get('/profil/refreshdata', ['as' => 'refresh','uses' => 'ProfileController@refreshData']);
 		Route::get('/pendaftaran/anggota', ['as' => 'p_anggota','uses' =>'ExtendController@index']);

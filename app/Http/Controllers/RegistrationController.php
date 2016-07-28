@@ -66,18 +66,23 @@ class RegistrationController extends Controller
       {
 
         $image = Input::file('photo');
+    $extension = $file->getClientOriginalExtension();
+    $mime=$file->getClientMimeType();
+    
+    $image = Image::make($file)->resize(300, 450);
+    $image=$image->stream();
+    $user=Auth::user()->email;
+    $filename  = time() .'-'.$user. '-profile.'. $extension;
 
-        $filename  = time() . '-' . Str::slug($request->name).'.'. $image->getClientOriginalExtension();
-
-        $path = public_path('image/'.$filename);
-
-        move_uploaded_file($image->getRealPath(), $path);
-               // Image::make($image->getRealPath())->resize(200, 200)->save($path);
+    Storage::disk('imgprofile')->put($filename,  $image->__toString());
+    
         $request->photo = $filename;
+        $request->photo_mime = $mime;
 
       }
       else{
        $request->photo="person.png";
+       $request->photo_mime = "image/png";
      }
 
 
@@ -100,6 +105,7 @@ class RegistrationController extends Controller
      $pribadi->fax=$request->fax;
      $pribadi->hp=$request->hp;
      $pribadi->foto=$request->photo;
+     $pribadi->foto_mime=$request->photo_mime;
      $pribadi->perusahaan=$request->perusahaan;
      $pribadi->perusahaan_alamat=$request->alamat_perusahaan;
      $pribadi->perusahaan_jabatan=$request->jabatan_perusahaan;
