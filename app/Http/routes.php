@@ -46,13 +46,16 @@ Route::group([
 		Route::post('/profil/pendaftaran',['as' => 'pendaftaran_anggota','uses' => 'ProfileController@setMember']);
 Route::post('/profil/pembayaran/transfer',['as' => 'transfer','uses' => 'ProfileController@payTransfer']);
 Route::post('/profil/pembayaran/kasir',['as' => 'kasir','uses' => 'ProfileController@payCashier']);
-
+//Route::post('/refreshdata',['as'=>'refresh','uses' => 'ProfileController@refreshData']);
 		Route::get('confirmation/{id}', 
 	['as' => 'confirmation', 'uses' => 'ProfileController@confirmation']);
 
 
 		Route::post('/profil/ubahfoto', ['as' => 'photo','uses' => 'ProfileController@changephoto']);
 		Route::get('/profil/getfoto/{filename}', ['as' => 'getfoto','uses' => 'ProfileController@getImgProf']);
+		Route::post('/profil/uploaddokumen', ['as' => 'dokumen','uses' => 'ProfileController@uploadDocument']);
+		Route::get('/profil/deletedokumen/{id}', ['as' => 'deletedocument','uses' => 'ProfileController@deleteDocument']);
 		Route::get('/profil/getProfil', ['as' => 'getprofil','uses' => 'ProfileController@getProfile']);
+		Route::get('/profil/refreshdata', ['as' => 'refresh','uses' => 'ProfileController@refreshData']);
 		Route::get('/pendaftaran/anggota', ['as' => 'p_anggota','uses' =>'ExtendController@index']);
 	});

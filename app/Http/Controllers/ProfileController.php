@@ -22,6 +22,7 @@ use App\pendidikan;
 use App\pekerjaan;
 use App\sertifikat;
 use App\registration;
+use App\berkas;
 use Mail;
 use stdclass;
 use Response;
@@ -94,8 +95,8 @@ class ProfileController extends Controller
     $image=$image->stream();
     $folder = $_SERVER['DOCUMENT_ROOT'] . '/tmp/';
     
-
-    $filename  = time() . '-profile.'. $extension;
+$user=Auth::user()->email;
+    $filename  = time() .'-'.$user. '-profile.'. $extension;
 
     Storage::disk('imgprofile')->put($filename,  $image->__toString());
 
@@ -117,9 +118,48 @@ class ProfileController extends Controller
 
         
 
-        return Redirect::back()
+   /*     return Redirect::back()
 
-        ->withSuccess('Foto diubah');
+        ->withSuccess('Foto diubah');*/
+    }
+    public function uploadDocument(Request $request){
+      
+
+   if(Input::file())
+   {
+    $file = Input::file('file');
+    $extension = $file->getClientOriginalExtension();
+    $mime=$file->getClientMimeType();
+    
+    $user=Auth::user()->email;
+  /*  $image=$image->stream();
+    $folder = $_SERVER['DOCUMENT_ROOT'] . '/tmp/';*/
+    
+
+    $filename  = time() . '-'.$user.'-.'.$file->getClientOriginalName().'-.'. $extension;
+
+    Storage::disk('filereq')->put($filename, file_get_contents($file->getRealPath()));
+
+
+    $pribadi=data_pribadi::select('user_id')->where('user_id',Auth::user()->id)->first();
+    
+  $berkas=new berkas;
+  $berkas->nama=$filename;
+  $berkas->format=$extension;
+  $berkas->mime=$mime;
+  $berkas->status="";
+  $berkas->user_id=$pribadi->user_id;
+  $berkas->save();
+  return Response::json( $berkas->id);
+}
+     
+    }
+
+    public function deleteDocument(Request $request){
+        $id=$request->id;
+        $berkas=berkas::findorFail($id);
+        $berkas->delete_stat=1;
+        $berkas->save();
     }
     public function updateDataPribadi(Request $request){
 
@@ -346,6 +386,12 @@ public function confirmation(Request $request){
 
     $pribadi=data_pribadi::where('user_id',$user_id)->first();
     return view('process_member/pembayaran')->with('nama',$pribadi->nama)->with('step', $registration->step_registration);
+}
+public function refreshData(){
+   $user_id=Auth::user()->id;
+        $data_pribadi=data_pribadi::where('user_id',$user_id)->first();
+        return Response::json($data_pribadi);
+/*    return redirect()->back()->withSuccess('Data diubah'); */
 }
 
 }

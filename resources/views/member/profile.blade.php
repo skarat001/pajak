@@ -4,8 +4,9 @@
 <script>
     // global app configuration object
     var config = {
-        routes: "{{ URL::route('getprofil') }}",
+        routes: "{{ URL::route('refresh') }}",
         profile: "{{ URL::route('photo') }}",
+        deletefile: "{{ URL::route('deletedocument') }}",
     };
 </script>
 <div class="container">
@@ -78,10 +79,7 @@
           </div>
         </div>
         <div class="col-md-9">
-<form action="{{ URL::route('photo')}}" class="dropzone" id="upload-photo">
-  <input type="hidden" name="_token" value="{{csrf_token()}}">
 
-</form>
 
     <!-- The container for the uploaded files -->
     <div id="files" class="files"></div>
@@ -472,15 +470,7 @@
 <script >
 
   $( document ).ready(function() {
-    Dropzone.options.uploadPhoto = {
-  paramName: "foto", // The name that will be used to transfer the file
-  maxFilesize: 2, // MB
-  maxFiles:1,
-  acceptedFiles: "image/jpeg,image/png,image/gif",
-  init: function() {
-    this.on("maxfilesreached", function(file) { location.reload(); });
-  }
-};
+
     $(function () {
       $('#datetimepicker1').datetimepicker({
        format: 'YYYY-MM-DD'

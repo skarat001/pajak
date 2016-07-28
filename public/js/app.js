@@ -1,15 +1,15 @@
 var waitingDialog = waitingDialog || (function ($) {
-    'use strict';
+	'use strict';
 
 	// Creating modal dialog's DOM
 	var $dialog = $(
 		'<div class="modal fade" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog" aria-hidden="true" style="padding-top:15%; overflow-y:visible;">' +
 		'<div class="modal-dialog modal-m">' +
 		'<div class="modal-content">' +
-			'<div class="modal-header"><h3 style="margin:0;"></h3></div>' +
-			'<div class="modal-body">' +
-				'<div class="progress progress-striped active" style="margin-bottom:0;"><div class="progress-bar" style="width: 100%"></div></div>' +
-			'</div>' +
+		'<div class="modal-header"><h3 style="margin:0;"></h3></div>' +
+		'<div class="modal-body">' +
+		'<div class="progress progress-striped active" style="margin-bottom:0;"><div class="progress-bar" style="width: 100%"></div></div>' +
+		'</div>' +
 		'</div></div></div>');
 
 	return {
@@ -20,7 +20,7 @@ var waitingDialog = waitingDialog || (function ($) {
 		 * 				  options.dialogSize - bootstrap postfix for dialog size, e.g. "sm", "m";
 		 * 				  options.progressType - bootstrap postfix for progress bar type, e.g. "success", "warning".
 		 */
-		show: function (message, options) {
+		 show: function (message, options) {
 			// Assigning defaults
 			if (typeof options === 'undefined') {
 				options = {};
@@ -53,28 +53,48 @@ var waitingDialog = waitingDialog || (function ($) {
 		/**
 		 * Closes dialog
 		 */
-		hide: function () {
-			$dialog.modal('hide');
-		}
-	};
+		 hide: function () {
+		 	$dialog.modal('hide');
+		 }
+		};
 
-})(jQuery);
+	})(jQuery);
 
-  $('#profileupload').fileupload({
-        url: config.profile,
-        dataType: 'json',
-        done: function (e, data) {
-            $.each(data.result.files, function (index, file) {
-                $('<p/>').text(file.name).appendTo('#files');
-            });
-        },
-        progressall: function (e, data) {
-        	alert(1)
-            var progress = parseInt(data.loaded / data.total * 100, 10);
-            $('#progress .progress-bar').css(
-                'width',
-                progress + '%'
-            );
-        }
-    }).prop('disabled', !$.support.fileInput)
-        .parent().addClass($.support.fileInput ? undefined : 'disabled');
+	Dropzone.options.uploadPhoto = {
+  paramName: "foto", // The name that will be used to transfer the file
+  maxFilesize: 2, // MB
+  maxFiles:1,
+  acceptedFiles: "image/jpeg,image/png,image/gif",
+  init: function() {
+  	this.on('complete', function () {
+  		location.reload();
+  	});
+  }
+
+};
+Dropzone.options.uploadDocument = {
+  paramName: "file", // The name that will be used to transfer the file
+  maxFilesize: 2, // MB
+  addRemoveLinks: true,
+  init: function() {
+  	this.on("success", function (file,rep) {
+
+  		file.id=rep;
+
+
+
+  	});
+  },
+  removedfile: function(file) {
+  	var id = file.id;    
+  	alert(id)    
+  	$.ajax({
+  		type: 'GET',
+  		url: config.deletefile,
+  		data: "id="+id,
+  		dataType: 'html'
+  	});
+  	var _ref;
+  	return (_ref = file.previewElement) != null ? _ref.parentNode.removeChild(file.previewElement) : void 0;        
+  }
+};

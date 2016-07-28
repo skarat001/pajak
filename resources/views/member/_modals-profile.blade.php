@@ -17,200 +17,200 @@
          <div class="form-group">
           <label class="col-md-3" for="Name" >
 
-          Nama Lengkap</label>
-          <div  class="col-md-9">
-            <input  type="text" id="name" name="name" class="form-control" value="{{$pribadi->nama}}" required autofocus>
+            Nama Lengkap</label>
+            <div  class="col-md-9">
+              <input  type="text" id="name" name="name" class="form-control" value="{{$pribadi->nama}}" required autofocus>
+            </div>
+          </div>
+          <div class="form-group">
+
+            <label  class="col-md-3" for="ttl" >Tempat/Tanggal Lahir</label>
+            <div  class="col-md-9">
+
+              <div  class="col-md-6">
+                <input  type="text" id="place_birth"  name="place_birth" class="form-control"  placeholder="tempat lahir" value=" {{$pribadi->tempat_lahir}}" required>
+              </div>
+
+
+              <div  class="col-md-6">
+               <div class='input-group date' id='datetimepicker1'>
+                <input type='text' class="form_control" name="date_birth" id="date-birth"  placeholder="tanggal lahir" value="{{$pribadi->tanggal_lahir}}" />
+                <span class="input-group-addon">
+                  <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+              </div>
+            </div>
+
           </div>
         </div>
+
         <div class="form-group">
-
-          <label  class="col-md-3" for="ttl" >Tempat/Tanggal Lahir</label>
+          <label class="col-md-3" for="Name" >Nomor KTP</label>
           <div  class="col-md-9">
-
-            <div  class="col-md-6">
-              <input  type="text" id="place_birth"  name="place_birth" class="form-control"  placeholder="tempat lahir" value=" {{$pribadi->tempat_lahir}}" required>
-            </div>
-
-
-            <div  class="col-md-6">
-             <div class='input-group date' id='datetimepicker1'>
-              <input type='text' class="form_control" name="date_birth" id="date-birth"  placeholder="tanggal lahir" value="{{$pribadi->tanggal_lahir}}" />
-              <span class="input-group-addon">
-                <span class="glyphicon glyphicon-calendar"></span>
-              </span>
-            </div>
+            <input  type="text" id="ktp" name="ktp" class="form-control" value="{{$pribadi->no_ktp}}" required >
           </div>
-
-        </div>
-      </div>
-
-      <div class="form-group">
-        <label class="col-md-3" for="Name" >Nomor KTP</label>
-        <div  class="col-md-9">
-          <input  type="text" id="ktp" name="ktp" class="form-control" value="{{$pribadi->no_ktp}}" required >
-        </div>
-      </div>  
-      <div class="form-group">
-        <label class="col-md-3" for="Name" >Nomor NPWP</label>
-        <div  class="col-md-9">
-          <input  type="text" id="npwp" name="npwp" class="form-control" value="{{$pribadi->npwp}}" required >
-        </div>
-      </div> 
-      <div class="form-group">
-        <label class="col-md-3" for="Name" >No Registrasi</label>
-        <div  class="col-md-9">
-          <input  type="text" id="no_registrasi" name="no_registrasi" class="form-control" value="{{$pribadi->no_registrasi}}" required >
-        </div>
-      </div> 
-      <div class="form-group">
-        <label class="col-md-3" for="Name" >Jenis Kelamin</label>
-        <div  class="col-md-9">
-          <div class="radio">
-            <label><input type="radio" value="Pria" name="jk"
-              @if($pribadi->jenis_kelamin=="Pria")
-              checked="true"
-              @endif
-
-              >Pria</input></label>
-            </div>
-            <div class="radio">
-
-              <label><input type="radio" value="Wanita" name="jk"
-               @if($pribadi->jenis_kelamin=="Wanita")
-               checked="true"
-               @endif
-               >Wanita</input></label>
-             </div>
-           </div> 
-         </div>
-         <div class="form-group">
-          <label class="col-md-3" for="Name" >Agama</label>
+        </div>  
+        <div class="form-group">
+          <label class="col-md-3" for="Name" >Nomor NPWP</label>
           <div  class="col-md-9">
-           {{
-           Form::select('agama',
-           ['Islam'=>'Islam','Kristen'=>'Kristen','Katolik'=>'Katolik','Hindu'=>'Hindu','Budha'=>'Budha',
-           'Lainnya'=>'Lainnya'] ,
-           $pribadi->agama, array('class' => 'form-control'))
-         }}
+            <input  type="text" id="npwp" name="npwp" class="form-control" value="{{$pribadi->npwp}}" required >
+          </div>
+        </div> 
+        <div class="form-group">
+          <label class="col-md-3" for="Name" >No Registrasi</label>
+          <div  class="col-md-9">
+            <input  type="text" id="no_registrasi" name="no_registrasi" class="form-control" value="{{$pribadi->no_registrasi}}" required >
+          </div>
+        </div> 
+        <div class="form-group">
+          <label class="col-md-3" for="Name" >Jenis Kelamin</label>
+          <div  class="col-md-9">
+            <div class="radio">
+              <label><input type="radio" value="Pria" name="jk"
+                @if($pribadi->jenis_kelamin=="Pria")
+                checked="true"
+                @endif
+
+                >Pria</input></label>
+              </div>
+              <div class="radio">
+
+                <label><input type="radio" value="Wanita" name="jk"
+                 @if($pribadi->jenis_kelamin=="Wanita")
+                 checked="true"
+                 @endif
+                 >Wanita</input></label>
+               </div>
+             </div> 
+           </div>
+           <div class="form-group">
+            <label class="col-md-3" for="Name" >Agama</label>
+            <div  class="col-md-9">
+             {{
+             Form::select('agama',
+             ['Islam'=>'Islam','Kristen'=>'Kristen','Katolik'=>'Katolik','Hindu'=>'Hindu','Budha'=>'Budha',
+             'Lainnya'=>'Lainnya'] ,
+             $pribadi->agama, array('class' => 'form-control'))
+           }}
+         </div>
        </div>
+       <div class="form-group">
+
+        <label class="col-md-3" for="Name" >Alamat Rumah</label>
+      </div>
+      <div class="form-group">
+        <label class="col-md-3" for="Provinsi" >Provinsi</label>
+        <div  class="col-md-9">
+         {{
+         Form::select('prov',
+         [ 
+         'Nanggroe Aceh Darussalam'=>'Nanggroe Aceh Darussalam',
+         'Sumatera Utara'=>'Sumatera Utara',
+         'Sumatera Barat'=>'Sumatera Barat',
+         'Riau'=>'Riau',
+         'Jambi'=>'Jambi',
+         'Sumatera Selatan'=>'Sumatera Selatan',
+         'Bengkulu'=>'Bengkulu',
+         'Lampung'=>'Lampung',
+         'Kepulauan Bangka Belitung'=>'Kepulauan Bangka Belitung',
+         'Kepulauan Riau'=>'Kepulauan Riau',
+         'DKI Jakarta'=>'DKI Jakarta',
+         'Jawa Barat'=>'Jawa Barat',
+         'Jawa Tengah'=>'Jawa Tengah',
+         'DI Yogyakarta'=>'DI Yogyakarta',
+         'Jawa Timur'=>'Jawa Timur',
+         'Banten'=>'Banten',
+         'Bali'=>'Bali',
+         'Nusa Tenggara Barat'=>'Nusa Tenggara Barat',
+         'Nusa Tenggara Timur'=>'Nusa Tenggara Timur',
+         'Kalimantan Barat'=>'Kalimantan Barat',
+         'Kalimantan Selatan'=>'Kalimantan Selatan',
+         'Kalimantan Timur'=>'Kalimantan Timur',
+         'Kalimantan Tengah'=>'Kalimantan Tengah',
+         'Sulawesi Utara'=>'Sulawesi Utara',
+         'Sulawesi Tengah'=>'Sulawesi Tengah',
+         'Sulawesi Selatan'=>'Sulawesi Selatan',
+         'Sulawesi Tenggara'=>'Sulawesi Tenggara',
+         'Gorontalo'=>'Gorontalo',
+         'Sulawesi Barat'=>'Sulawesi Barat',
+         'Maluku'=>'Maluku',
+         'Maluku Utara'=>'Maluku Utara',
+         'Papua'=>'Papua',
+         'Papua Barat'=>'Papua Barat',
+         'Kalimantan Utara'=>'Kalimantan Utara'
+         ] ,
+         $pribadi->alamat_provinsi, array('class' => 'form-control'))
+       }}
      </div>
-     <div class="form-group">
-
-      <label class="col-md-3" for="Name" >Alamat Rumah</label>
-    </div>
-    <div class="form-group">
-      <label class="col-md-3" for="Provinsi" >Provinsi</label>
-      <div  class="col-md-9">
-       {{
-       Form::select('prov',
-       [ 
-       'Nanggroe Aceh Darussalam'=>'Nanggroe Aceh Darussalam',
-       'Sumatera Utara'=>'Sumatera Utara',
-       'Sumatera Barat'=>'Sumatera Barat',
-       'Riau'=>'Riau',
-       'Jambi'=>'Jambi',
-       'Sumatera Selatan'=>'Sumatera Selatan',
-       'Bengkulu'=>'Bengkulu',
-       'Lampung'=>'Lampung',
-       'Kepulauan Bangka Belitung'=>'Kepulauan Bangka Belitung',
-       'Kepulauan Riau'=>'Kepulauan Riau',
-       'DKI Jakarta'=>'DKI Jakarta',
-       'Jawa Barat'=>'Jawa Barat',
-       'Jawa Tengah'=>'Jawa Tengah',
-       'DI Yogyakarta'=>'DI Yogyakarta',
-       'Jawa Timur'=>'Jawa Timur',
-       'Banten'=>'Banten',
-       'Bali'=>'Bali',
-       'Nusa Tenggara Barat'=>'Nusa Tenggara Barat',
-       'Nusa Tenggara Timur'=>'Nusa Tenggara Timur',
-       'Kalimantan Barat'=>'Kalimantan Barat',
-       'Kalimantan Selatan'=>'Kalimantan Selatan',
-       'Kalimantan Timur'=>'Kalimantan Timur',
-       'Kalimantan Tengah'=>'Kalimantan Tengah',
-       'Sulawesi Utara'=>'Sulawesi Utara',
-       'Sulawesi Tengah'=>'Sulawesi Tengah',
-       'Sulawesi Selatan'=>'Sulawesi Selatan',
-       'Sulawesi Tenggara'=>'Sulawesi Tenggara',
-       'Gorontalo'=>'Gorontalo',
-       'Sulawesi Barat'=>'Sulawesi Barat',
-       'Maluku'=>'Maluku',
-       'Maluku Utara'=>'Maluku Utara',
-       'Papua'=>'Papua',
-       'Papua Barat'=>'Papua Barat',
-       'Kalimantan Utara'=>'Kalimantan Utara'
-       ] ,
-       $pribadi->alamat_provinsi, array('class' => 'form-control'))
-     }}
    </div>
- </div>
- <div class="form-group">
-  <label class="col-md-3" for="alamat" >Alamat Lengkap</label>
-  <div  class="col-md-9">
-    <textarea class="form-control" id="alamat"  name="alamat">{{$pribadi->alamat}}</textarea>
+   <div class="form-group">
+    <label class="col-md-3" for="alamat" >Alamat Lengkap</label>
+    <div  class="col-md-9">
+      <textarea class="form-control" id="alamat"  name="alamat">{{$pribadi->alamat}}</textarea>
 
+    </div>
   </div>
-</div>
-<div class="form-group">
-  <label class="col-md-3" for="pos" >RT</label>
-  <div  class="col-md-9">
-    <input  type="text" id="rt" name="rt" value="{{$pribadi->rt}}" class="form-control"  >
+  <div class="form-group">
+    <label class="col-md-3" for="pos" >RT</label>
+    <div  class="col-md-9">
+      <input  type="text" id="rt" name="rt" value="{{$pribadi->rt}}" class="form-control"  >
 
+    </div>
   </div>
-</div>
-<div class="form-group">
-  <label class="col-md-3" for="pos" >RW</label>
-  <div  class="col-md-9">
-    <input  type="text" id="rw" name="rw" value="{{$pribadi->rw}}" class="form-control"  >
+  <div class="form-group">
+    <label class="col-md-3" for="pos" >RW</label>
+    <div  class="col-md-9">
+      <input  type="text" id="rw" name="rw" value="{{$pribadi->rw}}" class="form-control"  >
 
+    </div>
   </div>
-</div>
-<div class="form-group">
-  <label class="col-md-3" for="pos" >Kelurahan</label>
-  <div  class="col-md-9">
-    <input  type="text" id="kelurahan" name="kelurahan" value="{{$pribadi->kelurahan}}" class="form-control"  >
+  <div class="form-group">
+    <label class="col-md-3" for="pos" >Kelurahan</label>
+    <div  class="col-md-9">
+      <input  type="text" id="kelurahan" name="kelurahan" value="{{$pribadi->kelurahan}}" class="form-control"  >
 
+    </div>
   </div>
-</div>
-<div class="form-group">
-  <label class="col-md-3" for="pos" >Kecamatan</label>
-  <div  class="col-md-9">
-    <input  type="text" id="kecamatan" name="kecamatan" value="{{$pribadi->kecamatan}}" class="form-control"  >
+  <div class="form-group">
+    <label class="col-md-3" for="pos" >Kecamatan</label>
+    <div  class="col-md-9">
+      <input  type="text" id="kecamatan" name="kecamatan" value="{{$pribadi->kecamatan}}" class="form-control"  >
 
+    </div>
   </div>
-</div>
-<div class="form-group">
-  <label class="col-md-3" for="pos" >Kode Pos</label>
-  <div  class="col-md-9">
-    <input  type="text" id="pos" name="pos" class="form-control" value="{{$pribadi->alamat_pos}}" required >
+  <div class="form-group">
+    <label class="col-md-3" for="pos" >Kode Pos</label>
+    <div  class="col-md-9">
+      <input  type="text" id="pos" name="pos" class="form-control" value="{{$pribadi->alamat_pos}}" required >
 
+    </div>
   </div>
-</div>
 
 
-<div class="form-group">
-  <label class="col-md-3" for="email" >Email</label>
-  <div  class="col-md-9">
-    <input  type="text" id="email" name="email" class="form-control"  value="{{$pribadi->email}}" >
+  <div class="form-group">
+    <label class="col-md-3" for="email" >Email</label>
+    <div  class="col-md-9">
+      <input  type="text" id="email" name="email" class="form-control"  value="{{$pribadi->email}}" >
+    </div>
   </div>
-</div>
-<div class="form-group">
-  <label class="col-md-3" for="telp" >Telepon Rumah</label>
-  <div  class="col-md-9">
-    <input  type="text" id="telp" name="telp" class="form-control"  value="{{$pribadi->telp}}"  >
+  <div class="form-group">
+    <label class="col-md-3" for="telp" >Telepon Rumah</label>
+    <div  class="col-md-9">
+      <input  type="text" id="telp" name="telp" class="form-control"  value="{{$pribadi->telp}}"  >
+    </div>
   </div>
-</div>
-<div class="form-group">
-  <label class="col-md-3" for="email" >Fax Rumah</label>
-  <div  class="col-md-9">
-    <input  type="text" id="email" name="email" class="form-control"  value="{{$pribadi->fax}}"  >
+  <div class="form-group">
+    <label class="col-md-3" for="email" >Fax Rumah</label>
+    <div  class="col-md-9">
+      <input  type="text" id="email" name="email" class="form-control"  value="{{$pribadi->fax}}"  >
+    </div>
   </div>
-</div>
-<div class="form-group">
-  <label class="col-md-3" for="telp" >Handphone</label>
-  <div  class="col-md-9">
-    <input  type="text" id="telp" name="telp" class="form-control"  value="{{$pribadi->hp}}" >
+  <div class="form-group">
+    <label class="col-md-3" for="telp" >Handphone</label>
+    <div  class="col-md-9">
+      <input  type="text" id="telp" name="telp" class="form-control"  value="{{$pribadi->hp}}" >
+    </div>
   </div>
-</div>
 
 
 
@@ -493,17 +493,17 @@
       enctype="multipart/form-data" id="form-registrasi">
       <div class="modal-body">
         <div class="row">
-        
-<input type="hidden" name="_token" value="{{ csrf_token() }}">
-         <input type="hidden" name="r_id_pek" id="r_id_pek" value="">
 
-           <div class="form-group">
+          <input type="hidden" name="_token" value="{{ csrf_token() }}">
+          <input type="hidden" name="r_id_pek" id="r_id_pek" value="">
+
+          <div class="form-group">
             <label class="col-md-3" for="hp" >Perusahaan</label>
             <div  class="col-md-9">
               <input  type="text" id="r_perusahaan" name="r_perusahaan" class="form-control" required >
             </div>
             <div class="form-group">
-            <label class="col-md-3" for="hp" >Divisi</label>
+              <label class="col-md-3" for="hp" >Divisi</label>
               <div  class="col-md-9">
                 <input  type="text" id="r_divisi" name="r_divisi" class="form-control"  required>
               </div>
@@ -554,13 +554,13 @@
 
 
 
+    </div>
+    <div class="modal-footer">
+      <button type="submit" class="btn btn-primary" >Simpan</button>
+      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    </div>
   </div>
-  <div class="modal-footer">
-    <button type="submit" class="btn btn-primary" >Simpan</button>
-    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-  </div>
-</div>
-    </form>
+</form>
 </div>
 </div>
 
@@ -575,27 +575,27 @@
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">Riwayat Sertifikasi</h4>
       </div>
-       <form class="form-horizontal" method="POST" action="{{ URL::route('profil_sertifikat') }}" 
+      <form class="form-horizontal" method="POST" action="{{ URL::route('profil_sertifikat') }}" 
       enctype="multipart/form-data" id="form-registrasi">
       <div class="modal-body">
         <div class="row">
 
-<input type="hidden" name="_token" value="{{ csrf_token() }}">
-         <input type="hidden" name="id_ser" id="id_ser" value="">
+          <input type="hidden" name="_token" value="{{ csrf_token() }}">
+          <input type="hidden" name="id_ser" id="id_ser" value="">
 
           
 
-            <div class="form-group">
-              <label class="col-md-3" for="hp" >Tanggal Sertifikasi</label>
-              <div  class="col-md-9">
-               <div class='input-group date' id='datetimepicker5'>
-                <input type='text' class="form-control" name="tanggal"  id="tanggal" required/>
-                <span class="input-group-addon">
-                  <span class="glyphicon glyphicon-calendar"></span>
-                </span>
-              </div>
+          <div class="form-group">
+            <label class="col-md-3" for="hp" >Tanggal Sertifikasi</label>
+            <div  class="col-md-9">
+             <div class='input-group date' id='datetimepicker5'>
+              <input type='text' class="form-control" name="tanggal"  id="tanggal" required/>
+              <span class="input-group-addon">
+                <span class="glyphicon glyphicon-calendar"></span>
+              </span>
             </div>
           </div>
+        </div>
 
         <div class="form-group">
           <label class="col-md-3" for="telp" >Nama Sertifikasi</label>
@@ -618,13 +618,13 @@
 
 
 
+    </div>
+    <div class="modal-footer">
+      <button type="submit" class="btn btn-primary" >Simpan</button>
+      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    </div>
   </div>
-  <div class="modal-footer">
-  <button type="submit" class="btn btn-primary" >Simpan</button>
-    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-  </div>
-</div>
-    </form>
+</form>
 
 </div>
 </div>
@@ -635,8 +635,7 @@
   <div class="modal-dialog">
 
     <!-- Modal content-->
-    <form class="form-horizontal" method="POST" action="{{url('/profil/ubahfoto')}}" 
-    enctype="multipart/form-data">
+
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -645,29 +644,19 @@
       <div class="modal-body">
         <div class="row">
 
-          <input type="hidden" name="_token" value="{{ csrf_token() }}">
+          <form action="{{ URL::route('photo')}}" class="dropzone" id="upload-photo">
+            <input type="hidden" name="_token" value="{{csrf_token()}}">
+
+          </form>
+        </div>
 
 
 
 
-          <div class="form-group" >
-            <label class="col-md-3" for="hp" >Pilih Foto</label>
-            <div  class="col-md-9">
-             <input type="file" name="foto"></div>
-           </div>
-
-         </div>
-
-
-
-
-       </div>
-       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary" >Ubah</button>
       </div>
+
     </div>
-  </form>
+
 </div>
 </div>
 
@@ -784,133 +773,117 @@
         <h4 class="modal-title">Upload Dokumen</h4>
       </div>
       <div class="modal-body">
-        <div class="row">
-         <form class="form" class="form-vertical" action="a">
-
-           <div class="form-group" >      
-            <div class="control-label col-md-6">
+     
+        
+           <div class="row" >      
+            <div class="col-md-12">
               <label>Kopi Sertifikat Akuntan Profesional (jika ada)</label>
             </div>
-            <div class="col-md-6">
-            <input type="file" name="file-sertifikat" class="form-control"  >
-            </div>
-            </div>
-            <div class="form-group" >      
-            <div class="control-label col-md-6">
+           
+          </div>
+          <div class="row" >  
+            <div class="col-md-12" >  
               <label>Kopi Kartu Anggota</label>
             </div>
-            <div class="col-md-6">
-            <input type="file" name="file-kartu" class="form-control" required>
-            </div>
-            </div>
-            <div class="form-group" >      
-            <div class="control-label col-md-6">
-              <label>
-              Kopi KTP atau Bukti Domisili Lainnya</label>
-            </div>
-            <div class="col-md-6">
-            <input type="file" name="file-ktp" class="form-control" required> 
-            </div>
-            </div>
-           <div class="form-group" >      
-            <div class="control-label col-md-6">
-              <label>
-              Surat Keterangan atau Bukti Pengalaman Praktik</label>
-           </div>
-            <div class="col-md-6">
-            <input type="file" name="file-surat" class="form-control" required>
-            </div>
-            </div>
-            <div class="form-group" >      
-            <div class="control-label col-md-6">
-              <label>
-              Kopi Ijazah yang Dilegalisir</label>
-           </div>
-            <div class="col-md-6">
-            <input type="file" name="file-ijazah" class="form-control" required>
-            </div>
-            </div>
-           <div class="form-group" >      
-            <div class="control-label col-md-6">
-              <label>
-              2 Buah Pas Foto dengan Latar Belakang Putih 4x6 Terbaru</label>
-           </div>
-            <div class="col-md-6">
-            <input type="file" name="file-foto" class="form-control" required>
-            </div>
-            </div>
-            <div class="form-group" >      
-            <div class="control-label col-md-6">
-              <label>
-              Kopi Piagam Register Negara Akuntan atau Surat Keterangan Terdaftar dalam Register Negara Akuntan</label>
+           
           </div>
-            <div class="col-md-6">
-            <input type="file" name="file-piagam" class="form-control">
+        <div class="row" >  
+             <div class="col-md-12">
+              <label>
+                Kopi KTP atau Bukti Domisili Lainnya</label>
+              </div>
+              
             </div>
+           <div class="row" >  
+               <div class="col-md-12">
+                <label>
+                  Surat Keterangan atau Bukti Pengalaman Praktik</label>
+                </div>
+               
+              </div>
+              <div class="row" >  
+                 <div class="col-md-12">
+                  <label>
+                    Kopi Ijazah yang Dilegalisir</label>
+                  </div>
+                  
+                </div>
+               <div class="row" >  
+                   <div class="col-md-12">
+                    <label>
+                      2 Buah Pas Foto dengan Latar Belakang Putih 4x6 Terbaru</label>
+                    </div>
+                   
+                  </div>
+                  <div class="row">     
+                     <div class="col-md-12">
+                      <label>
+                        Kopi Piagam Register Negara Akuntan atau Surat Keterangan Terdaftar dalam Register Negara Akuntan</label>
+                      </div>
+                     
+                    </div>
+
+<span>Silahkan masukkan berkas-berkas yang dibutuhkan melalui kotak upload di bawah</span>
+  <form action="{{ URL::route('dokumen')}}" class="dropzone" id="upload-document">
+            <input type="hidden" name="_token" value="{{csrf_token()}}">
+
+          </form>
+
+                  
+             
+
+
+              </div>
+
             </div>
-    
+          </div>
+
+        </div>
 
 
+        <div class="modal fade" id="modal_password" role="dialog">
+          <div class="modal-dialog">
 
-  <div class="modal-footer">
-      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      <button type="submit" class="btn btn-primary" >Upload</button>
-    </div>
-       </form>
-
-     </div>
-   
-  </div>
-
-</div>
-</div>
-
-</div>
+            <!-- Modal content-->
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Ganti Password</h4>
+              </div>
+              <div class="modal-body">
+                <div class="row">
+                 <form class="form">
 
 
-<div class="modal fade" id="modal_password" role="dialog">
-  <div class="modal-dialog">
+                  <div class="form-group">
+                    <label class="col-md-3" for="telp" >Password Lama</label>
+                    <div  class="col-md-9">
+                     <input  type="password" id="lama" name="lama" class="form-control"  >
+                   </div>
+                 </div>
+                 <div class="form-group">
+                  <label class="col-md-3" for="hp" >Password Baru</label>
+                  <div  class="col-md-9">
+                    <input  type="password" id="baru" name="baru" class="form-control"  >
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-md-3" for="hp" >Konfirmasi Password</label>
+                  <div  class="col-md-9">
+                    <input  type="password" id="konfirmasi" name="konfirmasi" class="form-control"  >
+                  </div>
+                </div>
 
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Ganti Password</h4>
+              </form>
+
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary" data-dismiss="modal">Ubah</button>
+            </div>
+          </div>
+
+        </div>
       </div>
-      <div class="modal-body">
-        <div class="row">
-         <form class="form">
-
-
-          <div class="form-group">
-            <label class="col-md-3" for="telp" >Password Lama</label>
-            <div  class="col-md-9">
-             <input  type="password" id="lama" name="lama" class="form-control"  >
-           </div>
-         </div>
-         <div class="form-group">
-          <label class="col-md-3" for="hp" >Password Baru</label>
-          <div  class="col-md-9">
-            <input  type="password" id="baru" name="baru" class="form-control"  >
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="col-md-3" for="hp" >Konfirmasi Password</label>
-          <div  class="col-md-9">
-            <input  type="password" id="konfirmasi" name="konfirmasi" class="form-control"  >
-          </div>
-        </div>
-
-      </form>
 
     </div>
-    <div class="modal-footer">
-      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      <button type="submit" class="btn btn-primary" data-dismiss="modal">Ubah</button>
-    </div>
-  </div>
-
-</div>
-</div>
-
-</div>

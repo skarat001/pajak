@@ -53,7 +53,7 @@ return [
     ],
     'filereq' => [
     'driver' => 'local',
-    'root' => storage_path('app/file/img_prof/file_requirement'),
+    'root' => storage_path('app/file/file_requirement'),
     ],
     'public' => [
     'driver' => 'local',
