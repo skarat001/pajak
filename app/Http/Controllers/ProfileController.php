@@ -227,7 +227,7 @@ $user=Auth::user()->email;
         $pendidikan->kota=$request->kota;
         
         $pendidikan->save();
-        echo $pendidikan;
+        //echo $pendidikan;
         return redirect()->back()->withInput()->withSuccess('Data diubah');
     //  return redirect('/profil')->withSuccess('Data diubah');
     }

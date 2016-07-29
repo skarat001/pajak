@@ -105,14 +105,13 @@ Dropzone.options.uploadDocument = {
 };
 
 Dropzone.options.pAnggota  = { // The camelized version of the ID of the form element
-
+ paramName: "foto",
   // The configuration we've talked about above
   autoProcessQueue: false,
-  uploadMultiple: true,
-  parallelUploads: 100,
-  maxFiles: 100,
-  clickable:document.getElementById('gg'),
-previewsContainer: document.getElementById('preview-template'),
+  uploadMultiple: false,
+
+  clickable:document.getElementById('openUpload'),
+previewsContainer: document.getElementById('openUpload'),
   // The setting up of the dropzone
   init: function() {
     var myDropzone = this;

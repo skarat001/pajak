@@ -119,7 +119,9 @@ else{
 	$("#kota").val();
 	$("#id_pend").val();
 }
-$('#p_angota').attr('action',routes.pendidikan);
+
+$('#p_anggota').attr('action',routes.pendidikan);
+
 }
 
 
@@ -165,7 +167,7 @@ else
 }
 
 
-$('#p_angota').attr('action',routes.pekerjaan);
+$('#p_anggota').attr('action',routes.pekerjaan);
 }
 
 function h_e_pekerjaan(id){
@@ -198,7 +200,7 @@ else{
 	$("#id_ser").val();
 }
 
-$('#p_angota').attr('action',routes.sertifikat);
+$('#p_anggota').attr('action',routes.sertifikat);
 }
 
 
@@ -210,7 +212,7 @@ function h_e_sertifikat(id){
 }
 
 function changeform(){
-	$('#p_angota').attr('action',routes.all);
+	$('#p_anggota').attr('action',routes.all);
 }
 
 
