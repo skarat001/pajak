@@ -106,6 +106,7 @@
             <div  class="col-md-9">
               <input  type="text" id="r_perusahaan" name="r_perusahaan" class="form-control"  >
             </div>
+            </div>
             <div class="form-group">
               <label class="col-md-3" for="hp" >Divisi</label>
               <div  class="col-md-9">

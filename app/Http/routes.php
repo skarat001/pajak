@@ -44,8 +44,8 @@ Route::group([
 		Route::post('/profil/sertifikat',['as' => 'profil_sertifikat','uses' => 'ProfileController@setDataSertifikat']);
 		Route::get('/profil/h_sertifikat/{id}',['as' => 'h_sertifikat','uses' => 'ProfileController@deleteDatasertifikat']);
 		Route::post('/profil/pendaftaran',['as' => 'pendaftaran_anggota','uses' => 'ProfileController@setMember']);
-Route::post('/profil/pembayaran/transfer',['as' => 'transfer','uses' => 'ProfileController@payTransfer']);
-Route::post('/profil/pembayaran/kasir',['as' => 'kasir','uses' => 'ProfileController@payCashier']);
+
+Route::post('/profil/pembayaran',['as' => 'payment','uses' => 'ProfileController@Payment']);
 //Route::post('/refreshdata',['as'=>'refresh','uses' => 'ProfileController@refreshData']);
 		Route::get('confirmation/{id}', 
 	['as' => 'confirmation', 'uses' => 'ProfileController@confirmation']);

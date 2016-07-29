@@ -55,6 +55,10 @@ return [
     'driver' => 'local',
     'root' => storage_path('app/file/file_requirement'),
     ],
+    'filepay' => [
+    'driver' => 'local',
+    'root' => storage_path('app/file/file_payment'),
+    ],
     'public' => [
     'driver' => 'local',
     'root' => storage_path('app/public'),

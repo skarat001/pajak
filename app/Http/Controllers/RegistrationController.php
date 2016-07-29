@@ -65,7 +65,7 @@ class RegistrationController extends Controller
       if(Input::file())
       {
 
-        $image = Input::file('photo');
+       $file = Input::file('foto');
     $extension = $file->getClientOriginalExtension();
     $mime=$file->getClientMimeType();
     

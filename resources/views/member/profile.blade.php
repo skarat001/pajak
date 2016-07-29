@@ -24,7 +24,7 @@
        <div class="col-md-9"> 
          
 @include('layouts.step-member')
-@include('layouts.errors')
+
 @include('layouts.success')
         <!--  <ul class="nav nav-pills nav-wizard wrap">
             <li class="active"><a href="#" data-toggle="tab">Pendaftaran</a><div class="nav-arrow"></div></li>
@@ -81,7 +81,7 @@
         </div>
         <div class="col-md-9">
 
-
+@include('layouts.errors')
     <!-- The container for the uploaded files -->
     <div id="files" class="files"></div>
          <div class="panel-group" id="accordion">

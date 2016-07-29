@@ -8,11 +8,12 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\Request;
+
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 use App\Http\Requests;
 use App\Http\Requests\ImagePostRequest;
-
+use App\Http\Requests\ExtendPostRequest;
 use Image;
 use Auth;
 use App\User;
@@ -23,6 +24,7 @@ use App\pekerjaan;
 use App\sertifikat;
 use App\registration;
 use App\berkas;
+use App\pembayaran;
 use Mail;
 use stdclass;
 use Response;
@@ -53,7 +55,7 @@ class ProfileController extends Controller
 
         $registration=new registration;
 
-        $file = Storage::disk('imgprofile')->get($data_pribadi->foto);
+       
         return view('member/profile')->with('pribadi',$data_pribadi)->with('skp',$skp)
         ->with('sertifikat',$sertifikat)
         ->with('pekerjaan',$pekerjaan)->with('pendidikan',$pendidikan)
@@ -300,23 +302,28 @@ public function deleteDataSertifikat(Request $request){
  return redirect()->back()->withInput()->withSuccess('Data dihapus');
 }
 
-public function setMember(Request $request){
-    if(Input::file())
+public function setMember(ExtendPostRequest $request){
+/*    if(Input::file())
     {
 
-        $image = Input::file('photo');
+          $file = Input::file('photo');
+    $extension = $file->getClientOriginalExtension();
+    $mime=$file->getClientMimeType();
+    
+    $image = Image::make($file)->resize(300, 450);
+    $image=$image->stream();
+    $user=Auth::user()->email;
+    $filename  = time() .'-'.$user. '-profile.'. $extension;
 
-        $filename  = time() . '-' . Str::slug($request->name).'.'. $image->getClientOriginalExtension();
-
-        $path = public_path('image/'.$filename);
-
-        move_uploaded_file($image->getRealPath(), $path);
-               // Image::make($image->getRealPath())->resize(200, 200)->save($path);
+    Storage::disk('imgprofile')->put($filename,  $image->__toString());
+    
         $request->photo = $filename;
+        $request->photo_mime = $mime;
+
 
     }
 
-
+*/
 
 
     $user_id=Auth::user()->id;
@@ -364,29 +371,103 @@ public function setMember(Request $request){
       $panggilan="Ibu";
   }
 
-  Mail::send('emails.confirmation_member', ['title' => $panggilan, 'name' => $pribadi->nama, 'link_confirmation'=>$registrasi->confirmation_link], function ($message) use ($pribadi)
+/*  Mail::send('emails.confirmation_member', ['title' => $panggilan, 'name' => $pribadi->nama, 'link_confirmation'=>$registrasi->confirmation_link], function ($message) use ($pribadi)
   {
 
       $message->from('noreply.ikpi@gmail.com', 'IKPI');
       $email=$pribadi->email;
       $message->to($pribadi->email)->subject("Konfimasi Anggota");
 
-  });
+  });*/
   return view('process_member/confirmation_data')->with('pribadi',$pribadi)->with('step',$registrasi->step_registration);
 }
 
 public function confirmation(Request $request){
+
+
     $id=$request->id;
 
     $registration=registration::where('confirmation_link',$id)->first();
-    $registration->step_registration=6;
-    $registration->save();
 
-    $user_id=$registration->user_id;
+if($registration==null){
+ return Redirect::route('profil')->withErrors('Link konfirmasi pembayaran anda salah');
 
-    $pribadi=data_pribadi::where('user_id',$user_id)->first();
-    return view('process_member/pembayaran')->with('nama',$pribadi->nama)->with('step', $registration->step_registration);
 }
+else{
+     $step=$registration->step_registration;
+   $registration->step_registration=6;
+    $registration->save();
+        $user_id=$registration->user_id;
+
+    $pribadi=data_pribadi::where('user_id',$user_id)->firstOrFail();
+    return view('process_member/pembayaran')->with('nama',$pribadi->nama)->with('step', $step);
+}
+
+
+
+
+}
+
+
+
+public function Payment(Request $request){
+ $user_id=Auth::user()->id;
+ $pembayaran=new pembayaran;
+ if($request->tipe=="transfer"){
+
+
+      if(Input::file())
+      {
+
+       $file = Input::file('bukti');
+    $extension = $file->getClientOriginalExtension();
+       $mime=$file->getClientMimeType();
+    
+    
+    $user=Auth::user()->email;
+    $filename  = time() .'-'.$user. '-transfer.'. $extension;
+
+    Storage::disk('filepay')->put($filename,  file_get_contents($file->getRealPath()));
+    
+        $request->bukti_transfer = $filename;
+        $request->mime=$mime;
+
+      }
+      else{
+       $request->bukti_transfer="";
+       $request->mime="";
+     }
+
+$pembayaran->jenis=$request->tipe;
+$pembayaran->tanggal=$request->tgl_bayar;
+$pembayaran->jumlah=$request->jumlah;
+
+$pembayaran->bank_penerima=$request->bank_pen;
+$pembayaran->bank_pengirim=$request->bank_peng;
+$pembayaran->rekening_pengirim=$request->rek_peng;
+$pembayaran->pemegang_rekening=$request->rek_nama;
+$pembayaran->bukti_transfer=$request->bukti_transfer;
+$pembayaran->mime=$request->mime;
+$pembayaran->save();
+$registration=registration::where('user_id',$user_id)->first();
+ $registration->step_registration=7;
+    $registration->save();
+return Redirect::route('profil');
+ }
+ else  if($request->tipe=="kasir"){
+$pembayaran->jenis=$request->tipe;
+$pembayaran->tanggal=$request->tgl_bayar;
+$pembayaran->jumlah=$request->jumlah;
+$pembayaran->lokasi=$request->lokasi;
+$pembayaran->no_kwitansi=$request->kwitansi;
+$pembayaran->save();
+$registration=registration::where('user_id',$user_id)->first();
+ $registration->step_registration=7;
+    $registration->save();
+return Redirect::route('profil');
+ }
+}
+
 public function refreshData(){
    $user_id=Auth::user()->id;
         $data_pribadi=data_pribadi::where('user_id',$user_id)->first();

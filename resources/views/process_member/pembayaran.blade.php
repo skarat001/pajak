@@ -37,7 +37,9 @@
 
         <div class="tab-content">
           <div id="home" class="tab-pane fade in active">
-           <form class="form-horizontal" action="{{URL::route('kasir')}}">
+           <form class="form-horizontal" action="{{URL::route('payment')}}" method="POST">
+                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                   <input type="hidden" name="tipe" value="kasir">
             <div class="form-group">
             <label class="col-md-3" for="hp" >Nama Calon Anggota</label>
               <div  class="col-md-9">
@@ -58,7 +60,8 @@
              <div class="form-group">
             <label class="col-md-3" for="hp" >Sebesar</label>
               <div  class="col-md-6">
-               <input type="text" class="form-control" value="Rp. 125.000" disabled="true" name="uang">
+               <input type="text" class="form-control" value="Rp. 125.000"  name="uang">
+               <input type="hidden" class="form-control" value="125000"  name="jumlah">
               </div>
             </div>
              <div class="form-group">
@@ -125,7 +128,9 @@
      <img src="{{ asset('/image/web/panin.png')}}" width="150px" class="img_bank">
      <img src="{{ asset('/image/web/bri.jpg')}}" width="150px" class="img_bank">
 
-     <form class="form-horizontal" action="{{URL::route('kasir')}}">
+     <form class="form-horizontal" action="{{URL::route('payment')}}" method="POST" enctype= "multipart/form-data">
+           <input type="hidden" name="_token" value="{{ csrf_token() }}">
+  <input type="hidden" name="tipe" value="transfer">
             <div class="form-group">
             <label class="col-md-3" for="hp" >Nama Calon Anggota</label>
               <div  class="col-md-9">
@@ -148,13 +153,14 @@
             <label class="col-md-3" for="hp" >Sebesar</label>
               <div  class="col-md-6">
                <input type="text" class="form-control" value="Rp. 125.000" disabled="true" name="uang">
+                <input type="hidden" class="form-control" value="125000"  name="jumlah">
               </div>
             </div>
     <div class="form-group">
-            <label class="col-md-3" for="hp" >Bank Pengirim</label>
+            <label class="col-md-3" for="hp" >Bank Penerima</label>
               <div  class="col-md-6">
                 {{
-           Form::select('lokasi',
+           Form::select('bank_pen',
            [
           'Bank Mandiri Jakarta (123 123456 1234)'=>'Bank Mandiri Jakarta (123 123456 1234)',
            'Bank BCA Jakarta (9876533222)'=>'Bank BCA Jakarta (9876533222)',

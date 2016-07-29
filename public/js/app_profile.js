@@ -53,6 +53,7 @@ function c_pekerjaan(id){
 	$("#r_uraian").val(result[0].deskripsi);
 	$("#r_id_pek").val(id);
 } 
+
 }
 
 function b_pekerjaan(id){
@@ -120,7 +121,7 @@ else{
 	$("#id_pend").val();
 }
 
-$('#p_anggota').attr('action',routes.pendidikan);
+$('#p-anggota').attr('action',routes.pendidikan);
 
 }
 
@@ -167,7 +168,7 @@ else
 }
 
 
-$('#p_anggota').attr('action',routes.pekerjaan);
+$('#p-anggota').attr('action',routes.pekerjaan);
 }
 
 function h_e_pekerjaan(id){
@@ -200,7 +201,7 @@ else{
 	$("#id_ser").val();
 }
 
-$('#p_anggota').attr('action',routes.sertifikat);
+$('#p-anggota').attr('action',routes.sertifikat);
 }
 
 
@@ -212,7 +213,7 @@ function h_e_sertifikat(id){
 }
 
 function changeform(){
-	$('#p_anggota').attr('action',routes.all);
+	$('#p-anggota').attr('action',routes.all);
 }
 
 
@@ -239,6 +240,3 @@ function Popup(data)
         return true;
     }
 
-function a(){
-	alert(1)
-}

@@ -4,7 +4,7 @@ namespace App\Providers;
 use Validator;
 use App\data_pribadi;
 use Illuminate\Support\ServiceProvider;
-
+use Auth;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -21,21 +21,27 @@ class AppServiceProvider extends ServiceProvider
       });
       Validator::extend('uniquecustom', function($attribute, $value, $parameters, $validator) {
         $field="";
-if($attribute=="email"){
-    $field="email";
-}
-elseif ($attribute=="ktp") {
-    $field="no_ktp";
-}
-        $pribadi=data_pribadi::where($field,$value)->count();
+        if($attribute=="email"){
+          $field="email";
+        }
+        elseif ($attribute=="ktp") {
+          $field="no_ktp";
+        }
+        if (Auth::guest()){
+            $pribadi=data_pribadi::where($field,$value)->count();
+        }
+        else{
+           $pribadi=data_pribadi::where($field,$value)->where('user_id','<>',Auth::user()->id)->count();
+        }
+      
         if($pribadi!=0){
-           return false;
+         return false;
        }
        return true;
 
-   });
+     });
 
-  }
+    }
 
     /**
      * Register any application services.
@@ -46,4 +52,4 @@ elseif ($attribute=="ktp") {
     {
         //
     }
-}
+  }

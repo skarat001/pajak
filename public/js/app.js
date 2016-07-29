@@ -81,6 +81,7 @@ Dropzone.options.uploadDocument = {
   paramName: "file", // The name that will be used to transfer the file
   maxFilesize: 2, // MB
   addRemoveLinks: true,
+    maxFiles:12,
   init: function() {
   	this.on("success", function (file,rep) {
 
@@ -105,13 +106,14 @@ Dropzone.options.uploadDocument = {
 };
 
 Dropzone.options.pAnggota  = { // The camelized version of the ID of the form element
- paramName: "foto",
+ paramName: "file",
   // The configuration we've talked about above
-  autoProcessQueue: false,
+  //autoProcessQueue: false,
+  url:routes.documents,
   uploadMultiple: false,
-
-  clickable:document.getElementById('openUpload'),
-previewsContainer: document.getElementById('openUpload'),
+ maxFiles:12,
+  clickable:'#filePreview',
+previewsContainer: '#filePreview',
   // The setting up of the dropzone
   init: function() {
     var myDropzone = this;
@@ -119,9 +121,7 @@ previewsContainer: document.getElementById('openUpload'),
     // First change the button to actually tell Dropzone to process the queue.
     this.element.querySelector("button[type=submit]").addEventListener("click", function(e) {
       // Make sure that the form isn't actually being sent.
-      e.preventDefault();
-      e.stopPropagation();
-      myDropzone.processQueue();
+     
     });
 
     // Listen to the sendingmultiple event. In this case, it's the sendingmultiple event instead
