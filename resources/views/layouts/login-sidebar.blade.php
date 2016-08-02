@@ -3,6 +3,7 @@
 
 
  <form class="form-vertical"  role="form" method="POST" action="{{ url('/login') }}">
+ 
      {{ csrf_field() }}
         <h2 class="form-signin-heading">Log In</h2>
         <label for="inputEmail" >Email address</label>

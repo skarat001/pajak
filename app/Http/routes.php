@@ -24,17 +24,19 @@ Route::get('/confirmation', function () {
 	return view('process_member/confirmation');
 
 });
+
 Route::get('verifikasi/{id}', 
 	['as' => 'verification', 'uses' => 'RegistrationController@verification']);
 
 Route::auth();
 Route::group([
-	'middleware' => 'auth',
+	'middleware' => ['auth'],
 
 	], function () {
 
 
 		Route::get('/profil',['as' => 'profil','uses' => 'ProfileController@index']);
+		Route::post('/profil/pass',['as' => 'change_pass','uses' => 'ProfileController@changePassword']);
 		Route::post('/profil/pribadi',['as' => 'profil_pribadi','uses' => 'ProfileController@updateDataPribadi']);
 		Route::post('/profil/pekerjaan',['as' => 'profil_pekerjaan','uses' => 'ProfileController@updateDataPekerjaan']);
 		Route::post('/profil/pendidikan',['as' => 'profil_pendidikan','uses' => 'ProfileController@setDataPendidikan']);
@@ -45,10 +47,11 @@ Route::group([
 		Route::get('/profil/h_sertifikat/{id}',['as' => 'h_sertifikat','uses' => 'ProfileController@deleteDatasertifikat']);
 		Route::post('/profil/pendaftaran',['as' => 'pendaftaran_anggota','uses' => 'ProfileController@setMember']);
 
-Route::post('/profil/pembayaran',['as' => 'payment','uses' => 'ProfileController@Payment']);
+		Route::post('/profil/pembayaran',['as' => 'payment','uses' => 'ProfileController@Payment']);
+		Route::get('/profil/cekpembayaran',['as' => 'check_pay','uses' => 'ProfileController@checkPay']);
 //Route::post('/refreshdata',['as'=>'refresh','uses' => 'ProfileController@refreshData']);
 		Route::get('confirmation/{id}', 
-	['as' => 'confirmation', 'uses' => 'ProfileController@confirmation']);
+			['as' => 'confirmation', 'uses' => 'ProfileController@confirmation']);
 
 
 		Route::post('/profil/ubahfoto', ['as' => 'photo','uses' => 'ProfileController@changephoto']);

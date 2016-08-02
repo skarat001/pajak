@@ -10,6 +10,7 @@ use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\Facades\Redirect;
 class AuthController extends Controller
 {
     /*
@@ -49,7 +50,16 @@ class AuthController extends Controller
      * @return \Illuminate\Contracts\Validation\Validator
      */
 
-
+public function authenticated(Request $request, User $user)
+    {
+        if ($user->active) {
+            return redirect()->intended($this->redirectPath());
+        } else {
+            Auth::logout();
+           return view('auth/login')->withErrors('Data login anda tidak aktif');
+            // Raise exception, or redirect with error saying account is not active
+        }
+    }
     protected function validator(array $data)
     {
         return Validator::make($data, [

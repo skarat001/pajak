@@ -27,4 +27,10 @@ class User extends Authenticatable
     public function user_has_registrasi(){
       return $this->hasOne('App\registration','user_id');
   }
+  public function isAdmin(){
+    return $this->role=="admin";
+  }
+   public function isMember(){
+    return $this->role=="member";
+  }
 }

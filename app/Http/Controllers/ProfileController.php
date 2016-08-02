@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\File;
 use App\Http\Requests;
 use App\Http\Requests\ImagePostRequest;
 use App\Http\Requests\ExtendPostRequest;
+use App\Http\Requests\PasswordPostRequest;
 use Image;
 use Auth;
 use App\User;
@@ -28,7 +29,7 @@ use App\pembayaran;
 use Mail;
 use stdclass;
 use Response;
-
+use Hash;
 class ProfileController extends Controller
 {
     /**
@@ -55,7 +56,7 @@ class ProfileController extends Controller
 
         $registration=new registration;
 
-       
+
         return view('member/profile')->with('pribadi',$data_pribadi)->with('skp',$skp)
         ->with('sertifikat',$sertifikat)
         ->with('pekerjaan',$pekerjaan)->with('pendidikan',$pendidikan)
@@ -85,29 +86,29 @@ class ProfileController extends Controller
       return Response::json($data);
   }
   public function changephoto(ImagePostRequest $request){
-      
-
-   if(Input::file())
-   {
-    $file = Input::file('foto');
-    $extension = $file->getClientOriginalExtension();
-    $mime=$file->getClientMimeType();
-    
-    $image = Image::make($file)->resize(300, 300);
-    $image=$image->stream();
-    $folder = $_SERVER['DOCUMENT_ROOT'] . '/tmp/';
-    
-$user=Auth::user()->email;
-    $filename  = time() .'-'.$user. '-profile.'. $extension;
-
-    Storage::disk('imgprofile')->put($filename,  $image->__toString());
 
 
-    $pribadi=data_pribadi::where('user_id',Auth::user()->id)->first();
-    $pribadi->foto=$filename;
-    $pribadi->foto_mime = $mime;
-    $pribadi->save();
-}
+     if(Input::file())
+     {
+        $file = Input::file('foto');
+        $extension = $file->getClientOriginalExtension();
+        $mime=$file->getClientMimeType();
+
+        $image = Image::make($file)->resize(300, 300);
+        $image=$image->stream();
+        $folder = $_SERVER['DOCUMENT_ROOT'] . '/tmp/';
+
+        $user=Auth::user()->email;
+        $filename  = time() .'-'.$user. '-profile.'. $extension;
+
+        Storage::disk('imgprofile')->put($filename,  $image->__toString());
+
+
+        $pribadi=data_pribadi::where('user_id',Auth::user()->id)->first();
+        $pribadi->foto=$filename;
+        $pribadi->foto_mime = $mime;
+        $pribadi->save();
+    }
        /* $image = Input::file('foto');
 
         $filename  = time() . '-' . Str::slug($request->name).'.'. $image->getClientOriginalExtension();
@@ -122,29 +123,29 @@ $user=Auth::user()->email;
 
    /*     return Redirect::back()
 
-        ->withSuccess('Foto diubah');*/
-    }
-    public function uploadDocument(Request $request){
-      
+   ->withSuccess('Foto diubah');*/
+}
+public function uploadDocument(Request $request){
 
-   if(Input::file())
-   {
+
+ if(Input::file())
+ {
     $file = Input::file('file');
     $extension = $file->getClientOriginalExtension();
     $mime=$file->getClientMimeType();
     
     $user=Auth::user()->email;
   /*  $image=$image->stream();
-    $folder = $_SERVER['DOCUMENT_ROOT'] . '/tmp/';*/
-    
-
-    $filename  = time() . '-'.$user.'-.'.$file->getClientOriginalName().'-.'. $extension;
-
-    Storage::disk('filereq')->put($filename, file_get_contents($file->getRealPath()));
+  $folder = $_SERVER['DOCUMENT_ROOT'] . '/tmp/';*/
 
 
-    $pribadi=data_pribadi::select('user_id')->where('user_id',Auth::user()->id)->first();
-    
+  $filename  = time() . '-'.$user.'-.'.$file->getClientOriginalName().'-.'. $extension;
+
+  Storage::disk('filereq')->put($filename, file_get_contents($file->getRealPath()));
+
+
+  $pribadi=data_pribadi::select('user_id')->where('user_id',Auth::user()->id)->first();
+
   $berkas=new berkas;
   $berkas->nama=$filename;
   $berkas->format=$extension;
@@ -154,95 +155,95 @@ $user=Auth::user()->email;
   $berkas->save();
   return Response::json( $berkas->id);
 }
-     
-    }
 
-    public function deleteDocument(Request $request){
-        $id=$request->id;
-        $berkas=berkas::findorFail($id);
-        $berkas->delete_stat=1;
-        $berkas->save();
-    }
-    public function updateDataPribadi(Request $request){
+}
 
-        $id=Auth::user()->id;
-        $pribadi=data_pribadi::where('user_id',$id)->first();
+public function deleteDocument(Request $request){
+    $id=$request->id;
+    $berkas=berkas::findorFail($id);
+    $berkas->delete_stat=1;
+    $berkas->save();
+}
+public function updateDataPribadi(Request $request){
 
-        $pribadi->nama=$request->name;
-        $pribadi->tempat_lahir=$request->place_birth;
-        $pribadi->tanggal_lahir=$request->date_birth;
-        $pribadi->no_ktp=$request->ktp;
-        $pribadi->npwp=$request->npwp;
-        $pribadi->no_registrasi=$request->no_registrasi;
-        $pribadi->jenis_kelamin=$request->jk;
-        $pribadi->agama=$request->agama;
-        $pribadi->alamat_provinsi=$request->prov;
-        $pribadi->alamat=$request->alamat;
-        $pribadi->rt=$request->rt;
-        $pribadi->rw=$request->rw;
-        $pribadi->kelurahan=$request->kelurahan;
-        $pribadi->kecamatan=$request->kecamatan;
-        $pribadi->alamat_pos=$request->pos;
-        $pribadi->email=$request->email;
-        $pribadi->telp=$request->telp;
-        $pribadi->fax=$request->fax;
-        $pribadi->hp=$request->hp;
-        $pribadi->save();
-        return redirect()->back()->withInput()->withSuccess('Data diubah');
+    $id=Auth::user()->id;
+    $pribadi=data_pribadi::where('user_id',$id)->first();
+
+    $pribadi->nama=$request->name;
+    $pribadi->tempat_lahir=$request->place_birth;
+    $pribadi->tanggal_lahir=$request->date_birth;
+    $pribadi->no_ktp=$request->ktp;
+    $pribadi->npwp=$request->npwp;
+    $pribadi->no_registrasi=$request->no_registrasi;
+    $pribadi->jenis_kelamin=$request->jk;
+    $pribadi->agama=$request->agama;
+    $pribadi->alamat_provinsi=$request->prov;
+    $pribadi->alamat=$request->alamat;
+    $pribadi->rt=$request->rt;
+    $pribadi->rw=$request->rw;
+    $pribadi->kelurahan=$request->kelurahan;
+    $pribadi->kecamatan=$request->kecamatan;
+    $pribadi->alamat_pos=$request->pos;
+    $pribadi->email=$request->email;
+    $pribadi->telp=$request->telp;
+    $pribadi->fax=$request->fax;
+    $pribadi->hp=$request->hp;
+    $pribadi->save();
+    return redirect()->back()->withInput()->withSuccess('Data diubah');
     //return redirect('/profil')->withSuccess('Data diubah');
-    }
+}
 
-    public function updateDataPekerjaan(Request $request){
+public function updateDataPekerjaan(Request $request){
 
+    $id=Auth::user()->id;
+    $pribadi=data_pribadi::where('user_id',$id)->first();
+    $pribadi->perusahaan=$request->perusahaan;
+    $pribadi->perusahaan_alamat=$request->alamat_perusahaan;
+    $pribadi->perusahaan_jabatan=$request->jabatan_perusahaan;
+    $pribadi->perusahaan_korespondensi=$request->korespondensi_perusahaan;
+    $pribadi->perusahaan_telp=$request->telepon_perusahaan;
+    $pribadi->perusahaan_extensi=$request->extension_perusahaan;
+    $pribadi->perusahaan_fax=$request->fax_perusahaan;
+    $pribadi->perusahaan_level=$request->job_level;
+    $pribadi->perusahaan_kategori=$request->job_category;
+    $pribadi->perusahaan_tipe=$request->tipe_perusahaan;
+    $pribadi->perusahaan_bisnis=$request->kategori_bisnis;
+    $pribadi->save();
+    return redirect('/profil')->withSuccess('Data diubah');
+}
+
+public function setDataPendidikan(Request $request){
+    $id_pend=$request->id_pend;
+    if($id_pend==""){
         $id=Auth::user()->id;
-        $pribadi=data_pribadi::where('user_id',$id)->first();
-        $pribadi->perusahaan=$request->perusahaan;
-        $pribadi->perusahaan_alamat=$request->alamat_perusahaan;
-        $pribadi->perusahaan_jabatan=$request->jabatan_perusahaan;
-        $pribadi->perusahaan_korespondensi=$request->korespondensi_perusahaan;
-        $pribadi->perusahaan_telp=$request->telepon_perusahaan;
-        $pribadi->perusahaan_extensi=$request->extension_perusahaan;
-        $pribadi->perusahaan_fax=$request->fax_perusahaan;
-        $pribadi->perusahaan_level=$request->job_level;
-        $pribadi->perusahaan_kategori=$request->job_category;
-        $pribadi->perusahaan_tipe=$request->tipe_perusahaan;
-        $pribadi->perusahaan_bisnis=$request->kategori_bisnis;
-        $pribadi->save();
-        return redirect('/profil')->withSuccess('Data diubah');
+        $pendidikan= new pendidikan;
+        $pendidikan->user_id=$id;
+    }
+    else{
+        $pendidikan=pendidikan::where('id',$id_pend)->first();    
     }
 
-    public function setDataPendidikan(Request $request){
-        $id_pend=$request->id_pend;
-        if($id_pend==""){
-            $id=Auth::user()->id;
-            $pendidikan= new pendidikan;
-            $pendidikan->user_id=$id;
-        }
-        else{
-            $pendidikan=pendidikan::where('id',$id_pend)->first();    
-        }
-        
-        $pendidikan->tanggal=$request->date_certificate;
-        $pendidikan->sekolah=$request->sekolah;
-        $pendidikan->prodi=$request->prodi;
-        $pendidikan->jenjang=$request->jenjang;
-        $pendidikan->kota=$request->kota;
-        
-        $pendidikan->save();
+    $pendidikan->tanggal=$request->date_certificate;
+    $pendidikan->sekolah=$request->sekolah;
+    $pendidikan->prodi=$request->prodi;
+    $pendidikan->jenjang=$request->jenjang;
+    $pendidikan->kota=$request->kota;
+
+    $pendidikan->save();
         //echo $pendidikan;
-        return redirect()->back()->withInput()->withSuccess('Data diubah');
+    return redirect()->back()->withInput()->withSuccess('Data diubah');
     //  return redirect('/profil')->withSuccess('Data diubah');
-    }
+}
 
-    public function deleteDataPendidikan(Request $request){
-     $id_pend=$request->id;
-     $pendidikan=pendidikan::where('id',$id_pend)->first();
-     $pendidikan->delete_stat=1;
-     $pendidikan->save();
+public function deleteDataPendidikan(Request $request){
+   $id_pend=$request->id;
+   $pendidikan=pendidikan::where('id',$id_pend)->first();
+   $pendidikan->delete_stat=1;
+   $pendidikan->save();
    //return redirect('/profil')->withSuccess('Data dihapus');
-     return redirect()->back()->withInput()->withSuccess('Data dihapus');
- }
- public function setDataPekerjaan(Request $request){
+   return redirect()->back()->withInput()->withSuccess('Data dihapus');
+}
+public function setDataPekerjaan(Request $request){
     $id_pek=$request->r_id_pek;
     if($id_pek==""){
         $id=Auth::user()->id;
@@ -265,12 +266,12 @@ $user=Auth::user()->email;
     return redirect()->back()->withInput()->withSuccess('Data diubah');
 }
 public function deleteDataPekerjaan(Request $request){
- $id_pek=$request->id;
- $pekerjaan=pekerjaan::where('id',$id_pek)->first();
- $pekerjaan->delete_stat=1;
- $pekerjaan->save();
+   $id_pek=$request->id;
+   $pekerjaan=pekerjaan::where('id',$id_pek)->first();
+   $pekerjaan->delete_stat=1;
+   $pekerjaan->save();
    //return redirect('/profil')->withSuccess('Data dihapus');
- return redirect()->back()->withInput()->withSuccess('Data dihapus');
+   return redirect()->back()->withInput()->withSuccess('Data dihapus');
 }
 
 public function setDataSertifikat(Request $request){
@@ -294,14 +295,31 @@ public function setDataSertifikat(Request $request){
     return redirect()->back()->withInput()->withSuccess('Data diubah');
 }
 public function deleteDataSertifikat(Request $request){
- $id_ser=$request->id;
- $sertifikat=sertifikat::where('id',$id_ser)->first();
- $sertifikat->delete_stat=1;
- $sertifikat->save();
+   $id_ser=$request->id;
+   $sertifikat=sertifikat::where('id',$id_ser)->first();
+   $sertifikat->delete_stat=1;
+   $sertifikat->save();
    //return redirect('/profil')->withSuccess('Data dihapus');
- return redirect()->back()->withInput()->withSuccess('Data dihapus');
+   return redirect()->back()->withInput()->withSuccess('Data dihapus');
 }
 
+
+public function changePassword(PasswordPostRequest $request){
+$user_id=Auth::user()->id;
+
+
+$user=User::where('id',$user_id)->first();
+
+if(Hash::check($request->old_pass,$user->password)){
+  $user->password=bcrypt($request->new_pass);
+    $user->save();
+    return redirect()->back()->withSuccess('Password berhasil diubah');
+      
+}
+else{
+  return redirect()->back()->withErrors('Password lama tidak sama');
+}
+}
 public function setMember(ExtendPostRequest $request){
 /*    if(Input::file())
     {
@@ -371,14 +389,14 @@ public function setMember(ExtendPostRequest $request){
       $panggilan="Ibu";
   }
 
-/*  Mail::send('emails.confirmation_member', ['title' => $panggilan, 'name' => $pribadi->nama, 'link_confirmation'=>$registrasi->confirmation_link], function ($message) use ($pribadi)
+  Mail::send('emails.confirmation_member', ['title' => $panggilan, 'name' => $pribadi->nama, 'link_confirmation'=>$registrasi->confirmation_link], function ($message) use ($pribadi)
   {
 
       $message->from('noreply.ikpi@gmail.com', 'IKPI');
       $email=$pribadi->email;
       $message->to($pribadi->email)->subject("Konfimasi Anggota");
 
-  });*/
+  });
   return view('process_member/confirmation_data')->with('pribadi',$pribadi)->with('step',$registrasi->step_registration);
 }
 
@@ -389,90 +407,113 @@ public function confirmation(Request $request){
 
     $registration=registration::where('confirmation_link',$id)->first();
 
-if($registration==null){
- return Redirect::route('profil')->withErrors('Link konfirmasi pembayaran anda salah');
+    if($registration==null){
+       return Redirect::route('profil')->withErrors('Link konfirmasi pembayaran anda salah');
 
+   }
+   else{
+        $step=$registration->step_registration;
+    if($registration->step_registration<7){
+   
+   
+   $registration->step_registration=6;
+   $registration->save();
+   $user_id=$registration->user_id;
+
+   $pribadi=data_pribadi::where('user_id',$user_id)->firstOrFail();
+   return view('process_member/pembayaran')->with('nama',$pribadi->nama)->with('step', $step);
 }
 else{
-     $step=$registration->step_registration;
-   $registration->step_registration=6;
-    $registration->save();
-        $user_id=$registration->user_id;
-
-    $pribadi=data_pribadi::where('user_id',$user_id)->firstOrFail();
-    return view('process_member/pembayaran')->with('nama',$pribadi->nama)->with('step', $step);
+    return view('process_member/has_pay')->with('step', $step);
+}
+}
 }
 
 
 
 
+public function checkPay(){
+    $user_id=Auth::user()->id;
+    $registration=registration::where('user_id',$user_id)->first();
+    if($registration->confirmation_link==""){
+         return redirect()->back()->withErrors('Anda belum melakukan registrasi anggota');
+    }
+    else{
+         return Redirect::route('confirmation',[$registration->confirmation_link]);
+    }
 }
-
 
 
 public function Payment(Request $request){
- $user_id=Auth::user()->id;
- $pembayaran=new pembayaran;
- if($request->tipe=="transfer"){
+   $user_id=Auth::user()->id;
+   $pembayaran=new pembayaran;
+   $valid_date= date('Y-m-d', strtotime('+3 years'));
+   $userdb=User::where('id',$user_id)->first();
+   if($request->tipe=="transfer"){
 
 
       if(Input::file())
       {
 
-       $file = Input::file('bukti');
-    $extension = $file->getClientOriginalExtension();
-       $mime=$file->getClientMimeType();
-    
-    
-    $user=Auth::user()->email;
-    $filename  = time() .'-'.$user. '-transfer.'. $extension;
+         $file = Input::file('bukti');
+         $extension = $file->getClientOriginalExtension();
+         $mime=$file->getClientMimeType();
 
-    Storage::disk('filepay')->put($filename,  file_get_contents($file->getRealPath()));
-    
-        $request->bukti_transfer = $filename;
-        $request->mime=$mime;
 
-      }
-      else{
-       $request->bukti_transfer="";
-       $request->mime="";
+         $user=Auth::user()->email;
+         $filename  = time() .'-'.$user. '-transfer.'. $extension;
+
+         Storage::disk('filepay')->put($filename,  file_get_contents($file->getRealPath()));
+
+         $request->bukti_transfer = $filename;
+         $request->mime=$mime;
+
+     }
+     else{
+         $request->bukti_transfer="";
+         $request->mime="";
      }
 
-$pembayaran->jenis=$request->tipe;
-$pembayaran->tanggal=$request->tgl_bayar;
-$pembayaran->jumlah=$request->jumlah;
+     $pembayaran->jenis=$request->tipe;
+     $pembayaran->tanggal=$request->tgl_bayar;
+     $pembayaran->jumlah=$request->jumlah;
 
-$pembayaran->bank_penerima=$request->bank_pen;
-$pembayaran->bank_pengirim=$request->bank_peng;
-$pembayaran->rekening_pengirim=$request->rek_peng;
-$pembayaran->pemegang_rekening=$request->rek_nama;
-$pembayaran->bukti_transfer=$request->bukti_transfer;
-$pembayaran->mime=$request->mime;
-$pembayaran->save();
-$registration=registration::where('user_id',$user_id)->first();
- $registration->step_registration=7;
-    $registration->save();
-return Redirect::route('profil');
+     $pembayaran->bank_penerima=$request->bank_pen;
+     $pembayaran->bank_pengirim=$request->bank_peng;
+     $pembayaran->rekening_pengirim=$request->rek_peng;
+     $pembayaran->pemegang_rekening=$request->rek_nama;
+     $pembayaran->bukti_transfer=$request->bukti_transfer;
+     $pembayaran->mime=$request->mime;
+     $pembayaran->save();
+     $registration=registration::where('user_id',$user_id)->first();
+     $registration->step_registration=7;
+     $registration->save();
+  
+     $userdb->valid_date=$valid_date;
+     $userdb->save();
+    return view('process_member/has_pay')->with('step', $registration->step_registration);
  }
  else  if($request->tipe=="kasir"){
-$pembayaran->jenis=$request->tipe;
-$pembayaran->tanggal=$request->tgl_bayar;
-$pembayaran->jumlah=$request->jumlah;
-$pembayaran->lokasi=$request->lokasi;
-$pembayaran->no_kwitansi=$request->kwitansi;
-$pembayaran->save();
-$registration=registration::where('user_id',$user_id)->first();
- $registration->step_registration=7;
+    $pembayaran->jenis=$request->tipe;
+    $pembayaran->tanggal=$request->tgl_bayar;
+    $pembayaran->jumlah=$request->jumlah;
+    $pembayaran->lokasi=$request->lokasi;
+    $pembayaran->no_kwitansi=$request->kwitansi;
+    $pembayaran->save();
+    $registration=registration::where('user_id',$user_id)->first();
+    $registration->step_registration=7;
     $registration->save();
-return Redirect::route('profil');
- }
+    $userdb->valid_date=$valid_date;
+    $userdb->save();
+    return view('process_member/has_pay')->with('step', $registration->step_registration);
+}
 }
 
 public function refreshData(){
-   $user_id=Auth::user()->id;
-        $data_pribadi=data_pribadi::where('user_id',$user_id)->first();
-        return Response::json($data_pribadi);
-/*    return redirect()->back()->withSuccess('Data diubah'); */
+ $user_id=Auth::user()->id;
+ $data_pribadi=data_pribadi::where('user_id',$user_id)->first();
+ return Response::json($data_pribadi);
+ /*    return redirect()->back()->withSuccess('Data diubah'); */
 }
 
 }

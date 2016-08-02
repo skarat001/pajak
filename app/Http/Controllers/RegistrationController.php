@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 
 
 use App\data_pribadi;
-use App\user;
+use App\User;
 use App\pendidikan;
 use App\Registration;
 

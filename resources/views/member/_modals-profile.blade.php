@@ -566,6 +566,59 @@
 
 </div>
 
+
+
+<div class="modal fade" id="modal_password" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Ubah Password</h4>
+      </div>
+      <form class="form-horizontal" method="POST" action="{{ URL::route('change_pass') }}" 
+      enctype="multipart/form-data" id="form-registrasi">
+      <div class="modal-body">
+        <div class="row">
+
+          <input type="hidden" name="_token" value="{{ csrf_token() }}">
+          <input type="hidden" name="r_id_pek" id="r_id_pek" value="">
+
+          <div class="form-group">
+            <label class="col-md-3" for="hp" >Password Lama</label>
+            <div  class="col-md-9">
+              <input  type="password" id="old_pass" name="old_pass" class="form-control" required >
+            </div>
+            </div>
+            <div class="form-group">
+              <label class="col-md-3" for="hp" >Password Baru</label>
+              <div  class="col-md-9">
+                <input  type="password" id="new_pass" name="new_pass" class="form-control"  required>
+                <small>Harus dalam kombinasi angka dan huruf, minimal 6 karakter</small>
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="col-md-3" for="hp" >Ulangin Password</label>
+              <div  class="col-md-9">
+                <input  type="password" id="con_pass" name="con_pass" class="form-control"  >
+              </div>
+            </div>
+
+    </div>
+    <div class="modal-footer">
+      <button type="submit" class="btn btn-primary" >Simpan</button>
+      <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    </div>
+  </div>
+</form>
+</div>
+</div>
+
+</div>
+
+
+
 <div class="modal fade" id="modal_sertifikat" role="dialog">
   <div class="modal-dialog">
 

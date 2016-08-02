@@ -619,6 +619,7 @@
 <script type="text/javascript" src="{{ asset("/bower_components/moment/min/moment.min.js")}}"></script>
 
 <script type="text/javascript" src="{{ asset("/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js")}}"></script>
+<script type="text/javascript" src="{{ asset("/js/app_profile.js")}}"></script>
 
 <script >
 

@@ -140,7 +140,7 @@
                <div class="form-group">
             <label class="col-md-3" for="hp" >Tanggal Bayar</label>
               <div  class="col-md-4">
-             <div class='input-group date' id='datetimepicker1'>
+             <div class='input-group date' id='datetimepicker2'>
             <input type='text' class="form-control" name="tgl_bayar" />
             <span class="input-group-addon">
               <span class="glyphicon glyphicon-calendar"></span>
@@ -210,6 +210,12 @@
 
 </div>
 </div>
+
+@stop
+@section('scripts')
+<script type="text/javascript" src="{{ asset("/bower_components/moment/min/moment.min.js")}}"></script>
+
+<script type="text/javascript" src="{{ asset("/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js")}}"></script>
 <script >
 
   $( document ).ready(function() {
@@ -218,9 +224,10 @@
       $('#datetimepicker1').datetimepicker({
        format: 'YYYY-MM-DD'
      });
+       $('#datetimepicker2').datetimepicker({
+       format: 'YYYY-MM-DD'
+     });
     });
   });
   </script>
-
 @stop
-

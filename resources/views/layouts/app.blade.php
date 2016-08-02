@@ -132,7 +132,7 @@
  <script src="{{ URL::asset('bower_components/dropzone/dist/min/dropzone.min.js') }}"></script>
 
  <script src="{{ URL::asset('js/app.js') }}"></script>
-  <script src="{{ URL::asset('js/app_profile.js') }}"></script>
+
  <script type="text/javascript">
  $(document).ready(function(){
 

@@ -4,9 +4,11 @@
 <script>
     // global app configuration object
     var config = {
-        routes: "{{ URL::route('refresh') }}",
+        routes: "{{ URL::route('getprofil') }}",
         profile: "{{ URL::route('photo') }}",
         deletefile: "{{ URL::route('deletedocument') }}",
+        documents:"{{ URL::route('dokumen')}}",
+
     };
 </script>
 <meta name="_token" content="{{ csrf_token() }}"/>
@@ -52,12 +54,19 @@
               </div>
 
               <div class="col-md-12 profile-menu">
+                  @if($step==8)
                 <h5>Anggota</h5>
-                <h5>Utama</h5>
+               <!--  <h5>Utama</h5> -->
                 <h5>Sampai <strong>{{Auth::user()->valid_date}}</strong></h5>
+                @endif
               </div>
               <div class="col-md-12 profile-menu">
+              @if($step==8)
                 <span class="btn btn-success btn-block" >Sudah Registrasi Ulang</span>
+                @else
+                 <span class="btn btn-warning btn-block" >Belum Registrasi Ulang</span>
+                @endif
+
               </div>
               <div class="col-md-12 profile-menu">
                <button type="button" class="btn btn-secondary btn-block" data-toggle="modal" data-target="#modal_skp"><i class="fa fa-list" aria-hidden="true"></i> Klaim SKP</button>
@@ -74,7 +83,7 @@
                <button type="button" class="btn btn-secondary btn-block" data-toggle="modal" data-target="#modal_upload"><i class="fa fa-cloud-upload" aria-hidden="true"></i> Re-Upload Dokumen</button>
              </div>
              <div class="col-md-12 profile-menu">
-              <button class="btn btn-secondary btn-block"><i class="fa fa-credit-card" aria-hidden="true"></i> Validasi Pembayaran</button>
+              <a class="btn btn-default btn-block" href="{{URL::route('check_pay')}}"><i class="fa fa-credit-card" aria-hidden="true"></i> Validasi Pembayaran</a>
             </div>
 
           </div>
@@ -467,7 +476,7 @@
 <script type="text/javascript" src="{{ asset("/bower_components/moment/min/moment.min.js")}}"></script>
 
 <script type="text/javascript" src="{{ asset("/bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js")}}"></script>
-
+<script type="text/javascript" src="{{ asset("/js/app_profile.js")}}"></script>
 <script >
 
   $( document ).ready(function() {
