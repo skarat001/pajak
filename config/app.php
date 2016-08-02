@@ -164,7 +164,10 @@ return [
 
         //image
          Cviebrock\ImageValidator\ImageValidatorServiceProvider::class,
-         Intervention\Image\ImageServiceProvider::class
+         Intervention\Image\ImageServiceProvider::class,
+
+         //role
+          Zizaco\Entrust\EntrustServiceProvider::class,
         ],
 
     /*
@@ -215,6 +218,7 @@ return [
     'Form' => Collective\Html\FormFacade::class,
     'Html' => Collective\Html\HtmlFacade::class,
     'Image' => Intervention\Image\Facades\Image::class,
+    'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
 
     ],
 

@@ -30,7 +30,7 @@ Route::get('verifikasi/{id}',
 
 Route::auth();
 Route::group([
-	'middleware' => ['auth'],
+	'middleware' => ['auth','role:member'],
 
 	], function () {
 

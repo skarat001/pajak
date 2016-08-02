@@ -9,6 +9,7 @@ use Auth;
 use App\registration;
 use Response;
 
+
 class HomeController extends Controller
 {
     /**
@@ -27,7 +28,7 @@ class HomeController extends Controller
     {
   $registration=new registration;
 
-        return view('welcome')->with('step',$registration->getStep());
+      return view('welcome')->with('step',$registration->getStep());
 
        
     }

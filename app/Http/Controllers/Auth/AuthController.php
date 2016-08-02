@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Facades\Redirect;
+use Entrust;
 class AuthController extends Controller
 {
     /*
@@ -50,24 +51,30 @@ class AuthController extends Controller
      * @return \Illuminate\Contracts\Validation\Validator
      */
 
-public function authenticated(Request $request, User $user)
+    public function authenticated(Request $request, User $user)
     {
         if ($user->active) {
-            return redirect()->intended($this->redirectPath());
-        } else {
-            Auth::logout();
-           return view('auth/login')->withErrors('Data login anda tidak aktif');
+            if(Entrust::hasRole("admin")){
+                echo "admin";
+            }
+            elseif(Entrust::hasRole("member")){
+               return redirect()->intended($this->redirectPath());
+           }
+           
+       } else {
+        Auth::logout();
+        return view('auth/login')->withErrors('Data login anda tidak aktif');
             // Raise exception, or redirect with error saying account is not active
-        }
     }
-    protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|min:6|confirmed',
+}
+protected function validator(array $data)
+{
+    return Validator::make($data, [
+        'name' => 'required|max:255',
+        'email' => 'required|email|max:255|unique:users',
+        'password' => 'required|min:6|confirmed',
         ]);
-    }
+}
 
     /**
      * Create a new user instance after a valid registration.
@@ -81,6 +88,6 @@ public function authenticated(Request $request, User $user)
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
-        ]);
+            ]);
     }
 }

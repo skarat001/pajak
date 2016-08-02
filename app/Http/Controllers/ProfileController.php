@@ -26,6 +26,9 @@ use App\sertifikat;
 use App\registration;
 use App\berkas;
 use App\pembayaran;
+use Entrust;
+use App\Role;
+use App\Permission;
 use Mail;
 use stdclass;
 use Response;
@@ -55,7 +58,6 @@ class ProfileController extends Controller
         $pendidikan=pendidikan::where('user_id',$user_id)->where("delete_stat",0)->get();
 
         $registration=new registration;
-
 
         return view('member/profile')->with('pribadi',$data_pribadi)->with('skp',$skp)
         ->with('sertifikat',$sertifikat)
