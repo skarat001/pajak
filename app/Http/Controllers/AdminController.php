@@ -16,6 +16,7 @@ use App\Http\Requests;
 use Image;
 use Auth;
 use App\User;
+use App\Role;
 use App\skp;
 use App\data_pribadi;
 use App\pendidikan;
@@ -49,11 +50,22 @@ class AdminController extends Controller
    
  return view('admin.dashboard');
     }
- public function showNewMember()
+     public function showNewMember()
     {
-   $user=User::with('Pribadi')->paginate(20);
-   //return Response::json($user);
-  return view('admin.newmember', ['users' => $user]);
+     return view('admin.newmember');
+   }
+ public function getNewMember()
+    {
+  $user= User::join('data_pribadi','user.id','=','data_pribadi.user_id')
+ 
+  ->join('role_user','role_user.user_id','=','user.id')
+   ->join('roles','role_user.role_id','=','roles.id')
+       ->where('roles.name','member')
+       ->where('user.active',1)
+       ->select('data_pribadi.nama','data_pribadi.email','user.join_date')
+       ->get();
+   return Response::json($user);
+  //return view('admin.newmember', ['users' => $user]);
    }
 }
 

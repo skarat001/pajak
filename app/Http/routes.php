@@ -37,6 +37,7 @@ Route::group([
 		Route::get('/admin/panel', ['as' => 'admindashboard','uses' => 'AdminController@index']);
 
 		Route::get('/admin/member/baru', ['as' => 'membershownew','uses' => 'AdminController@showNewMember']);
+		Route::get('/admin/member/baru/get', ['as' => 'membergetnew','uses' => 'AdminController@getNewMember']);
 		Route::get('/admin/member/baru/{id}', ['as' => 'memberviewnew','uses' => 'AdminController@viewNewMember']);
 		Route::get('/admin/member/baru/cari/{key}', ['as' => 'membersearchnew','uses' => 'AdminController@searchNewMember']);
 

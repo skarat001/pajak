@@ -8,7 +8,7 @@
 
 	<ul class="nav nav-stacked" id="sidebar">
 		@role('member')
-			@if($step<=3)
+			@if($step<=2)
 		<li>
 	
 			<a href="{{ URL::route('p_anggota') }}"><strong>Pendaftaran Anggota</strong></a></li>

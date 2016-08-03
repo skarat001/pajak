@@ -36,6 +36,10 @@ class User extends Authenticatable
   }
    public function Pribadi()
     {
-        return $this->hasOne('App\data_pribadi','user_id');
+        return $this->hasOne('App\data_pribadi','user_id')->where('tempat_lahir','jakarta');
+    }
+     public function Role()
+    {
+        return $this->hasOne('App\Role','user_id');
     }
 }
