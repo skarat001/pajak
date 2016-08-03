@@ -55,7 +55,7 @@ class AuthController extends Controller
     {
         if ($user->active) {
             if(Entrust::hasRole("admin")){
-                echo "admin";
+               return Redirect::route('admindashboard');
             }
             elseif(Entrust::hasRole("member")){
                return redirect()->intended($this->redirectPath());

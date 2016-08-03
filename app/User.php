@@ -34,4 +34,8 @@ class User extends Authenticatable
    public function isMember(){
     return $this->role=="member";
   }
+   public function Pribadi()
+    {
+        return $this->hasOne('App\data_pribadi','user_id');
+    }
 }

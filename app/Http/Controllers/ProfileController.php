@@ -26,9 +26,7 @@ use App\sertifikat;
 use App\registration;
 use App\berkas;
 use App\pembayaran;
-use Entrust;
-use App\Role;
-use App\Permission;
+
 use Mail;
 use stdclass;
 use Response;

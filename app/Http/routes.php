@@ -30,6 +30,25 @@ Route::get('verifikasi/{id}',
 
 Route::auth();
 Route::group([
+	'middleware' => ['auth','role:admin'],
+
+	], function () {
+
+		Route::get('/admin/panel', ['as' => 'admindashboard','uses' => 'AdminController@index']);
+
+		Route::get('/admin/member/baru', ['as' => 'membershownew','uses' => 'AdminController@showNewMember']);
+		Route::get('/admin/member/baru/{id}', ['as' => 'memberviewnew','uses' => 'AdminController@viewNewMember']);
+		Route::get('/admin/member/baru/cari/{key}', ['as' => 'membersearchnew','uses' => 'AdminController@searchNewMember']);
+
+		Route::get('/admin/member/pembayaran', ['as' => 'membershowpay','uses' => 'AdminController@viewPayMember']);
+		Route::get('/admin/member/pembayaran/{id}', ['as' => 'memberviewpay','uses' => 'AdminController@viewPayMember']);
+		Route::put('/admin/member/pembayaran', ['as' => 'memberviewpay','uses' => 'AdminController@viewPayMember']);
+
+		Route::get('/admin/member/terdaftar', ['as' => 'membershowaccepted','uses' => 'AdminController@viewAccMember']);
+
+		Route::get('/admin/member/nonaktif', ['as' => 'membershowidle','uses' => 'AdminController@viewIsdleMember']);
+	});
+Route::group([
 	'middleware' => ['auth','role:member'],
 
 	], function () {

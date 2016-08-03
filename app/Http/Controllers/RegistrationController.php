@@ -50,6 +50,7 @@ class RegistrationController extends Controller
       $user->password=bcrypt($password);
       $user->role='member';
       $user->active=1;
+      $user->join_date=date("Y-m-d");
       $user->valid_date='2018-01-01';
       $user->save();
 
