@@ -38,8 +38,7 @@ Route::group([
 
 		Route::get('/admin/member/baru', ['as' => 'membershownew','uses' => 'AdminController@showNewMember']);
 		Route::get('/admin/member/baru/get', ['as' => 'membergetnew','uses' => 'AdminController@getNewMember']);
-		Route::get('/admin/member/baru/{id}', ['as' => 'memberviewnew','uses' => 'AdminController@viewNewMember']);
-		Route::get('/admin/member/baru/cari/{key}', ['as' => 'membersearchnew','uses' => 'AdminController@searchNewMember']);
+				
 
 		Route::get('/admin/member/pembayaran', ['as' => 'membershowpay','uses' => 'AdminController@viewPayMember']);
 		Route::get('/admin/member/pembayaran/{id}', ['as' => 'memberviewpay','uses' => 'AdminController@viewPayMember']);
@@ -47,7 +46,10 @@ Route::group([
 
 		Route::get('/admin/member/terdaftar', ['as' => 'membershowaccepted','uses' => 'AdminController@viewAccMember']);
 
-		Route::get('/admin/member/nonaktif', ['as' => 'membershowidle','uses' => 'AdminController@viewIsdleMember']);
+		Route::get('/admin/member/nonaktif', ['as' => 'membershowidle','uses' => 'AdminController@viewIdleMember']);
+
+		Route::delete('/admin/member/setnonaktif/{id}', ['as' => 'membersetidle','uses' => 'AdminController@setIdleMember']);
+		Route::put('/admin/member/resetpass/{id}', ['as' => 'memberresetpass','uses' => 'AdminController@resetPassMember']);
 	});
 Route::group([
 	'middleware' => ['auth','role:member'],

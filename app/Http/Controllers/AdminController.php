@@ -47,25 +47,55 @@ class AdminController extends Controller
      */
     public function index()
     {
-   
- return view('admin.dashboard');
-    }
-     public function showNewMember()
-    {
+
+     return view('admin.dashboard');
+   }
+   public function showNewMember()
+   {
      return view('admin.newmember');
    }
- public function getNewMember()
-    {
-  $user= User::join('data_pribadi','user.id','=','data_pribadi.user_id')
- 
-  ->join('role_user','role_user.user_id','=','user.id')
-   ->join('roles','role_user.role_id','=','roles.id')
-       ->where('roles.name','member')
-       ->where('user.active',1)
-       ->select('data_pribadi.nama','data_pribadi.email','user.join_date')
-       ->get();
-   return Response::json($user);
+   public function getNewMember()
+   {
+    $user= User::join('data_pribadi','user.id','=','data_pribadi.user_id')
+
+    ->join('role_user','role_user.user_id','=','user.id')
+    ->join('roles','role_user.role_id','=','roles.id')
+    ->where('roles.name','member')
+    ->where('user.active',1)
+    ->select('user.id','data_pribadi.nama','data_pribadi.email','user.join_date')
+    ->get();
+    return Response::json($user);
   //return view('admin.newmember', ['users' => $user]);
-   }
+  }
+  public function setIdleMember(Request $request){
+    $user=User::find($request->id);
+$user->active=0;
+$user->save();
+
+  }
+    public function resetPassMember(Request $request){
+    $user=User::find($request->id);
+ $password=str_random(6);
+      $user->password=bcrypt($password);
+$user->save();
+$pribadi=data_pribadi::where('user_id',$user->id)->first();
+ $panggilan="";
+     if ($pribadi->jenis_kelamin=="Pria"){
+      $panggilan="Bapak";
+    }
+    else{
+      $panggilan="Ibu";
+    }
+
+Mail::send('emails.changepass', ['title' => $panggilan, 'name' => $pribadi->nama, 'email'=>$user->email, 'password'=>$password], function ($message) use ($user)
+    {
+
+      $message->from('noreply.ikpi@gmail.com', 'IKPI');
+      $email=$user->email;
+      $message->to($email)->subject("Perubahan Password");
+
+    });
+
+  }
 }
 
